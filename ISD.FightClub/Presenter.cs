@@ -90,7 +90,10 @@ namespace ISD.FightClub
         public void AddToLog(string data)
         {
             this.log.Append(data + "\n");
-            this.Logging(data);
+            if (this.Logging != null)
+            {
+                this.Logging(data);
+            }
         }
         public void SaveLog()
         {

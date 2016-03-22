@@ -58,14 +58,23 @@ namespace FightClubLogic
             if (this.roundHalf == RoundHalf.Attack)
             {
                 this.roundHalf = RoundHalf.Defend;
-                this.RoundHalfChanged(this);
+                if (this.RoundHalfChanged != null)
+                {
+                    this.RoundHalfChanged(this);
+                }
             }
             else
             {
                 this.roundHalf = RoundHalf.Attack;
-                this.RoundHalfChanged(this);
+                if (this.RoundHalfChanged != null)
+                {
+                    this.RoundHalfChanged(this);
+                }
                 this.round++;
-                this.RoundChanged(this);
+                if (this.RoundChanged != null)
+                {
+                    this.RoundChanged(this); 
+                }
             }
         }
         public void AttackCPU(BodyPart bodyPartAttack)

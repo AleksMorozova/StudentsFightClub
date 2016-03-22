@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FightClubLogic;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FightClubLogic.Tests
 {
@@ -18,6 +13,12 @@ namespace FightClubLogic.Tests
             Assert.AreEqual(fighter.HP, 15);
             Assert.AreEqual(fighter.MaxHP, 15);
             Assert.AreEqual(fighter.Damage, 5);
+            Assert.AreEqual(fighter.Name, "123");
+
+            fighter = new Fighter("123", -10, -5);
+            Assert.AreEqual(fighter.HP, 1);
+            Assert.AreEqual(fighter.MaxHP, 1);
+            Assert.AreEqual(fighter.Damage, 0);
             Assert.AreEqual(fighter.Name, "123");
         }
 

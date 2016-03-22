@@ -62,8 +62,16 @@ namespace FightClubLogic
         public Fighter(string name, int maxHP, int damage)
         {
             this.name = name;
+            if (maxHP < 1)
+            {
+                maxHP = 1;
+            }
             this.maxHP = maxHP;
             this.hp = maxHP;
+            if (damage < 0)
+            {
+                damage = 0;
+            }
             this.damage = damage;
             this.SetBlock(BodyPart.Head);
         }
