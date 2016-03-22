@@ -1,4 +1,6 @@
-﻿namespace FightClubLogic
+﻿using System;
+
+namespace FightClubLogic
 {
     public class Fighter
     {
@@ -72,18 +74,36 @@
 
         public void GetHit(BodyPart bodyPart, int damage)
         {
+            if (damage < 0)
+            {
+                throw new ArgumentOutOfRangeException("Урон должен быть неотрицательным параметром.");
+            }
             if (bodyPart == this.blocked)
             {
-                this.Block(this);
+                if (this.Block != null)
+                {
+                    this.Block(this);
+                }
+            }
+            else if (damage < this.hp)
+            {
+                this.hp -= damage;
+                if (this.Wound != null)
+                {
+                    this.Wound(this, damage);
+                }
             }
             else
             {
-                this.hp -= damage;
-                this.Wound(this, damage);
-            }
-            if (this.hp <= 0)
-            {
-                this.Death(this);
+                this.hp = 0;
+                if (this.Wound != null)
+                {
+                    this.Wound(this, damage);
+                }
+                if (this.Death != null)
+                {
+                    this.Death(this);
+                }
             }
         }
         public void SetBlock(BodyPart bodyPart)
