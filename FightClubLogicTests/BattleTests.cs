@@ -26,8 +26,8 @@ namespace FightClubLogic.Tests
             Battle battle = new Battle(f1, f2);
 
             battle.Action(BodyPart.Head, BodyPart.Body);
-            Assert.AreEqual(battle.Fighter1.HP, 10);
-            Assert.AreEqual(battle.Fighter2.HP, 15);
+            Assert.AreEqual(battle.Fighter1.HP, 15);
+            Assert.AreEqual(battle.Fighter2.HP, 10);
             Assert.AreEqual(battle.Round, 1);
             Assert.AreEqual(battle.RoundHalf, RoundHalf.Defend);
 
@@ -50,19 +50,19 @@ namespace FightClubLogic.Tests
                 Fighter f2 = new Fighter("123", 15, 5);
                 Battle battle = new Battle(f1, f2);
                 battle.AttackCPU(BodyPart.Head);
-                if (battle.Fighter1.Blocked == BodyPart.Head)
+                if (battle.Fighter2.Blocked == BodyPart.Head)
                 {
-                    Assert.AreEqual(battle.Fighter1.HP, 15);
+                    Assert.AreEqual(battle.Fighter2.HP, 15);
                     headGenerated = true;
                 }
-                else if (battle.Fighter1.Blocked == BodyPart.Body)
+                else if (battle.Fighter2.Blocked == BodyPart.Body)
                 {
-                    Assert.AreEqual(battle.Fighter1.HP, 10);
+                    Assert.AreEqual(battle.Fighter2.HP, 10);
                     bodyGenerated = true;
                 } 
                 else
                 {
-                    Assert.AreEqual(battle.Fighter1.HP, 10);
+                    Assert.AreEqual(battle.Fighter2.HP, 10);
                     legsGenerated = true;
                 }
             } while (!(headGenerated && bodyGenerated && legsGenerated));

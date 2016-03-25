@@ -17,14 +17,28 @@ namespace FightClubLogic
         {
             get
             {
-                return fighter1;
+                if (this.roundHalf == RoundHalf.Attack)
+                {
+                    return fighter1;
+                }
+                else
+                {
+                    return fighter2;
+                }
             }
         }
         public Fighter Fighter2
         {
             get
             {
-                return fighter2;
+                if (this.roundHalf == RoundHalf.Attack)
+                {
+                    return fighter2;
+                }
+                else
+                {
+                    return fighter1;
+                }
             }
         }
         public int Round
@@ -52,9 +66,9 @@ namespace FightClubLogic
         {
             this.fighter2.SetBlock(bodyPartDefend);
             this.fighter2.GetHit(bodyPartAttack, fighter1.Damage);
-            Fighter temp = this.fighter1;
+            Fighter swapFighters = this.fighter1;
             this.fighter1 = this.fighter2;
-            this.fighter2 = temp;
+            this.fighter2 = swapFighters;
             if (this.roundHalf == RoundHalf.Attack)
             {
                 this.roundHalf = RoundHalf.Defend;
