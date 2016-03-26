@@ -2,6 +2,7 @@
 
 namespace FightClubLogic
 {
+    [Serializable]
     public class Fighter
     {
         private string name;
@@ -12,8 +13,11 @@ namespace FightClubLogic
         private string imagePath = null;
         public delegate void HitEvent(Fighter sender);
         public delegate void HitEventWithDamage(Fighter sender, int damage);
+        [field: NonSerialized]
         public event HitEvent Block;
+        [field: NonSerialized]
         public event HitEventWithDamage Wound;
+        [field: NonSerialized]
         public event HitEvent Death;
 
         public BodyPart Blocked

@@ -2,15 +2,18 @@
 
 namespace FightClubLogic
 {
+    [Serializable]
     public class Battle
     {
-        private Fighter fighter1;
-        private Fighter fighter2;
+        private Fighter attacker;
+        private Fighter defender;
         private int round = 1;
         private RoundHalf roundHalf = RoundHalf.Attack;
         private Random rng = new Random();
         public delegate void RoundChange(Battle sender);
+        [field: NonSerialized]
         public event RoundChange RoundChanged;
+        [field: NonSerialized]
         public event RoundChange RoundHalfChanged;
 
         public Fighter Fighter1
@@ -19,11 +22,11 @@ namespace FightClubLogic
             {
                 if (this.roundHalf == RoundHalf.Attack)
                 {
-                    return fighter1;
+                    return attacker;
                 }
                 else
                 {
-                    return fighter2;
+                    return defender;
                 }
             }
         }
@@ -33,11 +36,11 @@ namespace FightClubLogic
             {
                 if (this.roundHalf == RoundHalf.Attack)
                 {
-                    return fighter2;
+                    return defender;
                 }
                 else
                 {
-                    return fighter1;
+                    return attacker;
                 }
             }
         }
@@ -58,17 +61,17 @@ namespace FightClubLogic
 
         public Battle(Fighter fighter1, Fighter fighter2)
         {
-            this.fighter1 = fighter1;
-            this.fighter2 = fighter2;
+            this.attacker = fighter1;
+            this.defender = fighter2;
         }
 
         public void Action(BodyPart bodyPartAttack, BodyPart bodyPartDefend)
         {
-            this.fighter2.SetBlock(bodyPartDefend);
-            this.fighter2.GetHit(bodyPartAttack, fighter1.Damage);
-            Fighter swapFighters = this.fighter1;
-            this.fighter1 = this.fighter2;
-            this.fighter2 = swapFighters;
+            this.defender.SetBlock(bodyPartDefend);
+            this.defender.GetHit(bodyPartAttack, attacker.Damage);
+            Fighter swapFighters = this.attacker;
+            this.attacker = this.defender;
+            this.defender = swapFighters;
             if (this.roundHalf == RoundHalf.Attack)
             {
                 this.roundHalf = RoundHalf.Defend;

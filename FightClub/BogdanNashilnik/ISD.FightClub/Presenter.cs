@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Text;
 using FightClubLogic;
-using System.Windows.Forms;
 using System.IO;
+using System.Collections.Generic;
 
 namespace ISD.FightClub
 {
-    class Presenter : ILogable
+    [Serializable]
+    public class Presenter : ILogable
     {
         private Battle battle;
-        private StringBuilder log = new StringBuilder();
+        [NonSerialized]
+        private IView view;
+        private List<string> log = new List<string>();
+        [field: NonSerialized]
         public event Log Logging;
 
         public Battle Battle
@@ -19,11 +23,39 @@ namespace ISD.FightClub
                 return battle;
             }
         }
-
-        public Presenter(Fighter fighter1, Fighter fighter2)
+        public List<string> Log
+        {
+            get
+            {
+                return log;
+            }
+        }
+        
+        public Presenter(IView view)
+        {
+            this.view = view;
+        }
+        public void InitializeNewBattle(Fighter fighter1, Fighter fighter2)
         {
             this.battle = new Battle(fighter1, fighter2);
+            this.Subscribe();
+            view.InitializeGUI(fighter1, fighter2);
+            this.AddToLog("Битва началась " + DateTime.Now + ".");
+        }
+        public void InitializeLoadedBattle(Presenter presenter)
+        {
+            this.battle = presenter.battle;
+            this.Subscribe();
+            view.InitializeGUI(this.Battle.Fighter1, this.battle.Fighter2);
+            this.log.Clear();
+            foreach (string logRecord in presenter.log)
+            {
+                this.AddToLog(logRecord);
+            }
+        }
 
+        private void Subscribe()
+        {
             this.battle.Fighter1.Block += Fighter_Block;
             this.battle.Fighter1.Wound += Fighter_Wound;
             this.battle.Fighter1.Death += Fighter_Death;
@@ -31,23 +63,14 @@ namespace ISD.FightClub
             this.battle.Fighter2.Wound += Fighter_Wound;
             this.battle.Fighter2.Death += Fighter_Death;
         }
-
         private void Fighter_Death(Fighter sender)
         {
             this.AddToLog("Боец " + sender.Name + " погиб.");
             this.AddToLog("Бой закончился " + DateTime.Now + " за " + this.battle.Round + " раундов.");
             this.SaveLog();
-            string winner;
-            if (sender == this.battle.Fighter1)
-            {
-                winner = this.battle.Fighter2.Name;
-            }
-            else
-            {
-                winner = this.battle.Fighter1.Name;
-            }
-            MessageBox.Show("Победил " + winner + "!");
-            Application.Exit();
+
+            Fighter winner = (sender == this.battle.Fighter1) ? this.battle.Fighter2 : this.battle.Fighter1;
+            view.EndGame(winner);
         }
         private void Fighter_Wound(Fighter sender, int damage)
         {
@@ -89,7 +112,7 @@ namespace ISD.FightClub
 
         public void AddToLog(string data)
         {
-            this.log.Append(data + "\n");
+            this.log.Add(data);
             if (this.Logging != null)
             {
                 this.Logging(data);
@@ -101,7 +124,11 @@ namespace ISD.FightClub
             {
                 using (StreamWriter sr = new StreamWriter(fs))
                 {
-                    sr.Write("\n" + this.log);
+                    sr.Write("\n");
+                    foreach (string logRecord in this.log)
+                    {
+                        sr.Write("\n" + logRecord);
+                    }
                 }
             }
         }
