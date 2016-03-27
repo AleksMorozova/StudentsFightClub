@@ -23,6 +23,7 @@ namespace FightingClub_Nikita
         }
         int Rounds
         {
+            get;
             set;
         }
         string Log
@@ -64,7 +65,8 @@ namespace FightingClub_Nikita
             butHead.Enabled = false;
             butBody.Enabled = false;
             butLeg.Enabled = false;
-            listBoxLog.Items.Add("*Log saved*. Log saved to the root directory");
+            Log = "Fight over in " + Rounds + " rounds";
+            Log = "*Log saved*. Log saved to the root directory.";
         }
         #region Events
         private void butHead_Click(object sender, EventArgs e)
@@ -135,6 +137,7 @@ namespace FightingClub_Nikita
         }
         public int Rounds
         {
+            get { return Int32.Parse(lblRounds.Text); }
             set
             {
                 lblRounds.Text = value.ToString();
@@ -142,10 +145,10 @@ namespace FightingClub_Nikita
         }
         public string Log
         {
-            get { return listBoxLog.Text; }
+            get { return textBoxLog.Text; }
             set
             {
-                listBoxLog.Items.Add(value);
+                textBoxLog.Text += value + "\n";
             }
         }
         #endregion

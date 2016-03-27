@@ -2,6 +2,7 @@
 using System.IO;
 using GameProcess;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace FightingClub_Nikita
 {
@@ -15,9 +16,18 @@ namespace FightingClub_Nikita
     {
         public void SaveLog(String _log)
         {
-            using (StreamWriter writer = new StreamWriter(new FileStream("log.txt", FileMode.Append)))
+            try
             {
-                writer.Write(_log);
+                using (StreamWriter w = File.AppendText("log.txt"))
+                {
+                    w.WriteLine("\n{0} {1}", DateTime.Now.ToLongTimeString(),
+                        DateTime.Now.ToLongDateString());
+                    w.WriteLine(_log);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

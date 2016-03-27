@@ -50,7 +50,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRounds = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblFinish = new System.Windows.Forms.Label();
-            this.listBoxLog = new System.Windows.Forms.ListBox();
+            this.textBoxLog = new System.Windows.Forms.RichTextBox();
             this.menuMainStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayerTwo)).BeginInit();
@@ -265,22 +265,23 @@
             this.lblFinish.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblFinish.Visible = false;
             // 
-            // listBoxLog
+            // textBoxLog
             // 
-            this.listBoxLog.Font = new System.Drawing.Font("Monotype Corsiva", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.listBoxLog.FormattingEnabled = true;
-            this.listBoxLog.ItemHeight = 18;
-            this.listBoxLog.Location = new System.Drawing.Point(12, 352);
-            this.listBoxLog.Name = "listBoxLog";
-            this.listBoxLog.Size = new System.Drawing.Size(761, 130);
-            this.listBoxLog.TabIndex = 22;
+            this.textBoxLog.Font = new System.Drawing.Font("Monotype Corsiva", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxLog.Location = new System.Drawing.Point(12, 350);
+            this.textBoxLog.Name = "textBoxLog";
+            this.textBoxLog.ReadOnly = true;
+            this.textBoxLog.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+            this.textBoxLog.Size = new System.Drawing.Size(761, 136);
+            this.textBoxLog.TabIndex = 22;
+            this.textBoxLog.Text = "";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(785, 511);
-            this.Controls.Add(this.listBoxLog);
+            this.Controls.Add(this.textBoxLog);
             this.Controls.Add(this.lblFinish);
             this.Controls.Add(this.statusMainStrip);
             this.Controls.Add(this.pictureBoxPlayerTwo);
@@ -336,7 +337,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRounds;
         private System.Windows.Forms.Label lblFinish;
-        private System.Windows.Forms.ListBox listBoxLog;
+        private System.Windows.Forms.RichTextBox textBoxLog;
     }
 }
 
