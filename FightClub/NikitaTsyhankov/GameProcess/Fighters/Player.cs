@@ -36,6 +36,7 @@ namespace GameProcess.Fighters
             set
             {
                 _name = value;
+                args.Name = _name;
             }
         }
         public int HealthPoints
@@ -58,7 +59,6 @@ namespace GameProcess.Fighters
         {
             args = new EventArgsFighter();
             Name = _name;
-            args.Name = _name;
             HealthPoints = _hp;
             args.HP = HealthPoints;
         }

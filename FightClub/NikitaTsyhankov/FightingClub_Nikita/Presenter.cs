@@ -34,7 +34,7 @@ namespace FightingClub_Nikita
         #region Logics' events
         private void _view_EndGame(object sender, EventArgsFighter e)
         {
-            _view.Log = e.Name + "is dead!";
+            _view.Log = e.Name + " is dead!";
             string winner = (sender == _process.Player1) ? _process.Player2.Name : _process.Player1.Name;
             MessageBox.Show(e.Name + " is dead!", winner + " win!", MessageBoxButtons.OK);
             _manager.SaveLog(_view.Log);
