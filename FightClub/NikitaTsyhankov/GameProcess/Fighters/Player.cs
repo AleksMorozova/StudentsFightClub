@@ -2,7 +2,24 @@
 
 namespace GameProcess.Fighters
 {
-    public class Player
+    interface IPlayer
+    {
+        int HealthPoints
+        {
+            get;
+        }
+        string Name
+        {
+            get; set;
+        }
+        void GetHit(BodyParts _hited, int _dmg);
+        void SetBlock(BodyParts _blocked);
+        event EventHandler<EventArgsFighter> Block;
+        event EventHandler<EventArgsFighter> Wound;
+        event EventHandler<EventArgsFighter> Death;
+    }
+
+    public class Player: IPlayer
     {
         #region Variables
         private EventArgsFighter args;
@@ -11,25 +28,23 @@ namespace GameProcess.Fighters
         public event EventHandler<EventArgsFighter> Death;
 
         private BodyParts _blocked;
-
         private string _name;
+        private int _hp;
         public string Name
         {
             get { return _name; }
             set
             {
                 _name = value;
-                args.Name = value;
             }
         }
-
-        private int _hp;
         public int HealthPoints
         {
             get { return _hp; }
             private set
             {
                 _hp = value;
+                args.HP = value;
                 if (_hp < 0)
                 {
                     _hp = 0;
@@ -43,8 +58,9 @@ namespace GameProcess.Fighters
         {
             args = new EventArgsFighter();
             Name = _name;
-            args.HP = HealthPoints;
+            args.Name = _name;
             HealthPoints = _hp;
+            args.HP = HealthPoints;
         }
 
         public void GetHit(BodyParts _hited, int _dmg)

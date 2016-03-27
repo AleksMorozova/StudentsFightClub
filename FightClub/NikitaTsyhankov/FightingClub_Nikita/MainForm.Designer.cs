@@ -45,12 +45,12 @@
             this.lblHPPlayer1 = new System.Windows.Forms.Label();
             this.lblHPPlayer2 = new System.Windows.Forms.Label();
             this.pictureBoxPlayer1 = new System.Windows.Forms.PictureBox();
-            this.textBoxLog = new System.Windows.Forms.RichTextBox();
             this.pictureBoxPlayerTwo = new System.Windows.Forms.PictureBox();
             this.statusMainStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRounds = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblFinish = new System.Windows.Forms.Label();
+            this.listBoxLog = new System.Windows.Forms.ListBox();
             this.menuMainStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayerTwo)).BeginInit();
@@ -217,24 +217,6 @@
             this.pictureBoxPlayer1.TabIndex = 13;
             this.pictureBoxPlayer1.TabStop = false;
             // 
-            // textBoxLog
-            // 
-            this.textBoxLog.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.textBoxLog.AutoWordSelection = true;
-            this.textBoxLog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxLog.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.textBoxLog.EnableAutoDragDrop = true;
-            this.textBoxLog.Font = new System.Drawing.Font("Monotype Corsiva", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxLog.Location = new System.Drawing.Point(12, 360);
-            this.textBoxLog.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.textBoxLog.Name = "textBoxLog";
-            this.textBoxLog.ReadOnly = true;
-            this.textBoxLog.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.textBoxLog.Size = new System.Drawing.Size(760, 124);
-            this.textBoxLog.TabIndex = 18;
-            this.textBoxLog.TabStop = false;
-            this.textBoxLog.Text = "";
-            // 
             // pictureBoxPlayerTwo
             // 
             this.pictureBoxPlayerTwo.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPlayerTwo.Image")));
@@ -283,15 +265,25 @@
             this.lblFinish.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblFinish.Visible = false;
             // 
+            // listBoxLog
+            // 
+            this.listBoxLog.Font = new System.Drawing.Font("Monotype Corsiva", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.listBoxLog.FormattingEnabled = true;
+            this.listBoxLog.ItemHeight = 18;
+            this.listBoxLog.Location = new System.Drawing.Point(12, 352);
+            this.listBoxLog.Name = "listBoxLog";
+            this.listBoxLog.Size = new System.Drawing.Size(761, 130);
+            this.listBoxLog.TabIndex = 22;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(785, 511);
+            this.Controls.Add(this.listBoxLog);
             this.Controls.Add(this.lblFinish);
             this.Controls.Add(this.statusMainStrip);
             this.Controls.Add(this.pictureBoxPlayerTwo);
-            this.Controls.Add(this.textBoxLog);
             this.Controls.Add(this.lblHPPlayer2);
             this.Controls.Add(this.lblHPPlayer1);
             this.Controls.Add(this.lblPlayer1);
@@ -339,12 +331,12 @@
         private System.Windows.Forms.Label lblPlayer1;
         private System.Windows.Forms.Label lblHPPlayer1;
         private System.Windows.Forms.Label lblHPPlayer2;
-        private System.Windows.Forms.RichTextBox textBoxLog;
         private System.Windows.Forms.PictureBox pictureBoxPlayerTwo;
         private System.Windows.Forms.StatusStrip statusMainStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRounds;
         private System.Windows.Forms.Label lblFinish;
+        private System.Windows.Forms.ListBox listBoxLog;
     }
 }
 

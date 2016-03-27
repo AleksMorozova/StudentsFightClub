@@ -1,15 +1,50 @@
 ﻿using GameProcess;
 using GameProcess.Fighters;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace FightingClub_Nikita
 {
-    public partial class MainForm : Form
+    public interface IGameForm
+    {
+        string NamePlayer1
+        {
+            get;
+            set;
+        }
+        string NameCPUPlayer
+        {
+            set;
+        }
+        bool Title
+        {
+            set;
+        }
+        int Rounds
+        {
+            set;
+        }
+        string Log
+        {
+            get;
+            set;
+        }
+        void HPPlayers(int player1, int player2);
+        event EventHandler<EventArgsBodyParts> ButHeadClick;
+        event EventHandler<EventArgsBodyParts> ButBodyClick;
+        event EventHandler<EventArgsBodyParts> ButLegClick;
+        event EventHandler ButLoadGameClick;
+        event EventHandler ButSaveGameClick;
+    }
+
+    public partial class MainForm : Form, IGameForm
     {
         public event EventHandler<EventArgsBodyParts> ButHeadClick;
         public event EventHandler<EventArgsBodyParts> ButBodyClick;
         public event EventHandler<EventArgsBodyParts> ButLegClick;
+        public event EventHandler ButLoadGameClick;
+        public event EventHandler ButSaveGameClick;
 
         private StartForm start = new StartForm();
         private EventArgsBodyParts argsPart;
@@ -17,10 +52,9 @@ namespace FightingClub_Nikita
         public MainForm()
         {
             InitializeComponent();
-            Application.Run(start);
-            NamePlayer1 = start.StartName;
-
             argsPart = new EventArgsBodyParts();
+            start.ShowDialog();
+            NamePlayer1 = start.StartName;
         }
 
         public void BlockGame(string _winner)
@@ -30,13 +64,7 @@ namespace FightingClub_Nikita
             butHead.Enabled = false;
             butBody.Enabled = false;
             butLeg.Enabled = false;
-            //    Вынести в отдельный класс для вывода в файл
-            /* File.WriteAllText(System.Environment.GetFolderPath
-                  (System.Environment.SpecialFolder.Personal) 
-                  + @"\BattleLog.txt",
-                  textBoxLog.Text);
-              textBoxLog.Text += "Log saved. To open log file press 'File => Open log file'.";
-              */
+            listBoxLog.Items.Add("*Log saved*. Log saved to the root directory");
         }
         #region Events
         private void butHead_Click(object sender, EventArgs e)
@@ -56,6 +84,10 @@ namespace FightingClub_Nikita
             argsPart._part = BodyParts._leg;
             if (ButLegClick != null) ButLegClick(this, argsPart);
         }
+        private void openLogFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ButLoadGameClick != null) ButLoadGameClick(this, EventArgs.Empty);
+        }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -65,21 +97,6 @@ namespace FightingClub_Nikita
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Restart();
-        }
-
-        private void openLogFileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //          Вынести в отдельный класс вывода в файл
-            /*if (File.Exists(System.Environment.GetFolderPath
-                (System.Environment.SpecialFolder.Personal)
-                + @"\BattleLog.txt"))
-            {
-                File.OpenText(System.Environment.GetFolderPath
-                (System.Environment.SpecialFolder.Personal) + @"\BattleLog.txt");
-            }
-            else
-                MessageBox.Show("File is not exist.", "File is not created yet.", MessageBoxButtons.OK);
-                */
         }
         #endregion
 
@@ -95,7 +112,7 @@ namespace FightingClub_Nikita
                 lblPlayer1.Text = value;
             }
         }
-        public string NamePlayer2
+        public string NameCPUPlayer
         {
             set
             {
@@ -113,7 +130,7 @@ namespace FightingClub_Nikita
         {
             set
             {
-                lblTitle.Text = (value) ? "Atack!" : "Block!";
+                lblTitle.Text = (value) ? "Block!" : "Atack!";
             }
         }
         public int Rounds
@@ -123,12 +140,12 @@ namespace FightingClub_Nikita
                 lblRounds.Text = value.ToString();
             }
         }
-        public string AddLog
+        public string Log
         {
+            get { return listBoxLog.Text; }
             set
             {
-
-                textBoxLog.AppendText(value + "\n");
+                listBoxLog.Items.Add(value);
             }
         }
         #endregion
