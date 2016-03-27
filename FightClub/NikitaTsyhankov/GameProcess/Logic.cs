@@ -2,32 +2,44 @@
 
 namespace GameProcess
 {
-    public class Logic
+    public interface ILogic
     {
-        public Player player1;
-        public CPUPlayer player2;
+        Player Player1
+        {
+            get;
+        }
+        CPUPlayer Player2
+        {
+            get;
+        }
+        void MakeStep(BodyParts _part);
+    }
 
+    public class Logic: ILogic
+    {
+        public Player Player1 { get; private set; }
+        public CPUPlayer Player2 { get; private set; }
         public int Round { get;  private set;}
 
         public Logic()
         {
-            player1 = new Player("NoName", ConstantFields.basicHp);
-            player2 = new CPUPlayer(ConstantFields.basicHp);
+            Player1 = new Player("NoName", ConstantFields.basicHp);
+            Player2 = new CPUPlayer(ConstantFields.basicHp);
 
-            Round = 0;
+            Round = 1;
         }
 
         public void MakeStep(BodyParts _part)
         {
-            if(Round % 2 == 0)
+            if(Round % 2 != 0)
             {
-                player2.MakeBlock();
-                player2.GetHit(_part, ConstantFields.basicDamage);
+                Player2.MakeBlock();
+                Player2.GetHit(_part, ConstantFields.basicDamage);
             }
             else
             {
-                player1.SetBlock(_part);
-                player1.GetHit(player2.MakeHit(), ConstantFields.basicDamage);
+                Player1.SetBlock(_part);
+                Player1.GetHit(Player2.MakeHit(), ConstantFields.basicDamage);
             }
             Round++;
         }

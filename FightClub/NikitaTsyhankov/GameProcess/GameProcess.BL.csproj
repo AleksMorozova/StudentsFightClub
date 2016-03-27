@@ -7,8 +7,8 @@
     <ProjectGuid>{5F87480E-10CD-4AC8-86D4-0015E7500E4D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GameProcess</RootNamespace>
-    <AssemblyName>GameProcess</AssemblyName>
+    <RootNamespace>GameProcess.BL</RootNamespace>
+    <AssemblyName>GameProcess.BL</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
