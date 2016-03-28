@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameProcess.Fighters
+namespace GameProcess.BL.Fighters
 {
     public class EventArgsFighter : EventArgs
     {

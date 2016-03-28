@@ -1,5 +1,5 @@
-﻿using GameProcess;
-using GameProcess.Fighters;
+﻿using GameProcess.BL;
+using GameProcess.BL.Fighters;
 using System;
 using System.Windows.Forms;
 
@@ -7,11 +7,11 @@ namespace FightingClub_Nikita
 {
     public class Presenter
     {
-        private readonly MainForm _view;
-        private readonly Logic _process;
-        private readonly FileManager _manager;
+        private readonly IGameForm _view;
+        private readonly IFighting _process;
+        private readonly IManager _manager;
 
-        public Presenter(MainForm _view, Logic _process, FileManager _manager)
+        public Presenter(IGameForm _view, IFighting _process, IManager _manager)
         {
             this._process = _process;
             this._view = _view;

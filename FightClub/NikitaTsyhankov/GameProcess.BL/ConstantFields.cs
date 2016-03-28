@@ -1,4 +1,4 @@
-﻿namespace GameProcess
+﻿namespace GameProcess.BL
 {
     public enum BodyParts
     {
