@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5F87480E-10CD-4AC8-86D4-0015E7500E4D}</ProjectGuid>
+    <ProjectGuid>{E1DE34EB-47B7-4970-A640-B921740F7AD5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GameProcess.BL</RootNamespace>
@@ -41,14 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConstantFields.cs" />
-    <Compile Include="Fighters\EventArgsFighter.cs" />
     <Compile Include="Fighters\CPUPlayer.cs" />
+    <Compile Include="Fighters\EventArgsFighter.cs" />
+    <Compile Include="Fighters\IFighter.cs" />
     <Compile Include="Fighters\Player.cs" />
+    <Compile Include="IFighting.cs" />
     <Compile Include="Logic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

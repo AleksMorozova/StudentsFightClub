@@ -1,17 +1,10 @@
-﻿using System;
+﻿using GameProcess.BL;
+using System;
 using System.IO;
-using GameProcess;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace FightingClub_Nikita
 {
-    interface IManager
-    {
-        void SaveLog(String _log);
-        void SaveGame(Logic _process);
-        Logic LoadGame();
-    }
     public class FileManager : IManager
     {
         public void SaveLog(String _log)
@@ -31,11 +24,11 @@ namespace FightingClub_Nikita
             }
         }
 
-        public void SaveGame(Logic _process)
+        public void SaveGame(IFighting _process)
         {
 
         }
-        public Logic LoadGame()
+        public IFighting LoadGame()
         {
             return null;
         }

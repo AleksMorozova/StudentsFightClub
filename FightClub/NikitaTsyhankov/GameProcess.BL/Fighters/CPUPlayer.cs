@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace GameProcess.Fighters
+namespace GameProcess.BL.Fighters
 {
-    public class CPUPlayer : Player
+    public class CPUPlayer : Player, IFighter
     {
         private static Random rnd;
 

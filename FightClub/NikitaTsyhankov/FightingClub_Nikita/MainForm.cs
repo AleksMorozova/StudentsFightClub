@@ -1,44 +1,10 @@
-﻿using GameProcess;
-using GameProcess.Fighters;
+﻿using GameProcess.BL;
+using GameProcess.BL.Fighters;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace FightingClub_Nikita
 {
-    public interface IGameForm
-    {
-        string NamePlayer1
-        {
-            get;
-            set;
-        }
-        string NameCPUPlayer
-        {
-            set;
-        }
-        bool Title
-        {
-            set;
-        }
-        int Rounds
-        {
-            get;
-            set;
-        }
-        string Log
-        {
-            get;
-            set;
-        }
-        void HPPlayers(int player1, int player2);
-        event EventHandler<EventArgsBodyParts> ButHeadClick;
-        event EventHandler<EventArgsBodyParts> ButBodyClick;
-        event EventHandler<EventArgsBodyParts> ButLegClick;
-        event EventHandler ButLoadGameClick;
-        event EventHandler ButSaveGameClick;
-    }
-
     public partial class MainForm : Form, IGameForm
     {
         public event EventHandler<EventArgsBodyParts> ButHeadClick;
