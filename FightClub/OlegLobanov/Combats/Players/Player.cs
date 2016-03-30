@@ -29,13 +29,13 @@ namespace Combats
             this.SetBlock(BodyPart.Head);
         }
 
-        public void GetHit(BodyPart part, int damage)
+        public virtual void GetHit(BodyPart part, int damage)
         {
             if (Blocked == part)
             {
                 if (Block != null)
                 {
-                    Block(this);
+                    Block(this,new PlayerEventArgs(this.Name,this.HP));
                 }
             }
             else
@@ -45,7 +45,7 @@ namespace Combats
 
         }
         
-        public void SetBlock(BodyPart part)
+        public virtual void SetBlock(BodyPart part)
         {
             Blocked = part;
         }
@@ -55,7 +55,7 @@ namespace Combats
             HP -= damage;
             if (Wound != null)
             {
-                Wound(this);
+                Wound(this, new PlayerEventArgs(this.Name, this.HP));
             }
 
             if (HP <= 0)
@@ -63,7 +63,7 @@ namespace Combats
                 HP = 0;
                 if (Death != null)
                 {
-                    Death(this);
+                    Death(this, new PlayerEventArgs(this.Name, this.HP));
                 }
             }
         }
