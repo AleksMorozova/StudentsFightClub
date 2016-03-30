@@ -14,8 +14,7 @@ namespace Combats
     public class Controller:ILoggable
     {
        public Player human {get;private set;}
-       public CompPlayer comp {get;private set;}
-
+       public Player comp {get;private set;}
 
        public string status { get; private set; }
        public int Round{get;private set;}
@@ -55,13 +54,22 @@ namespace Combats
            AddToLog(status);
 
            SaveLog();
+           human.Death -= Dead;
+           comp.Death -= Dead;
+
+           human.Wound -= Wounded;
+           comp.Wound -= Wounded;
+
+           human.Block -= Blocked;
+           comp.Block -= Blocked;
+
            if (GameEnded != null)
            {
                GameEnded();
            }
        }
 
-       void Dead(Player sender)
+       void Dead(Player sender, PlayerEventArgs e)
        {
            AddToLog(sender.Name + " рассыпался на кусочки");
            if (sender.Equals(human))
@@ -73,13 +81,13 @@ namespace Combats
                EndGame(human);
            }
        }
-       void Wounded(Player sender)
+       void Wounded(Player sender, PlayerEventArgs e)
        {
-           AddToLog(sender.Name + " получает удар");
+           AddToLog(e.Name + " получает удар");
        }
-       void Blocked(Player sender)
+       void Blocked(Player sender, PlayerEventArgs e)
        {
-           AddToLog(sender.Name + " заблокировал удар");
+           AddToLog(e.Name + " заблокировал удар");
        }
 
         public void Tick(BodyPart userinput)
@@ -87,7 +95,7 @@ namespace Combats
            if (phase == Phase.First)
            {
                status = "Игрок защищается...";
-               comp.EasyRandDefence();
+               ((CompPlayer)comp).EasyRandDefence();
                comp.GetHit(userinput, human.Damage);
                phase = Phase.Second;
                
@@ -96,11 +104,10 @@ namespace Combats
            {
                status = "Игрок атакует...";
                human.SetBlock(userinput);
-               human.GetHit(comp.EasyRandAttack(), comp.Damage);
+               human.GetHit(((CompPlayer)comp).EasyRandAttack(), comp.Damage);
                phase = Phase.First;
 
                Round++;
-               
            }
            
        }
