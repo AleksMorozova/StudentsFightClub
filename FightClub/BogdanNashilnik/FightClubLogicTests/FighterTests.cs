@@ -79,7 +79,7 @@ namespace FightClubLogic.Tests
 
             fighter.SetBlock(BodyPart.Head);
             Assert.AreEqual(fighter.Blocked, BodyPart.Head);
-            
+
             fighter.SetBlock(BodyPart.Body);
             Assert.AreEqual(fighter.Blocked, BodyPart.Body);
 
@@ -137,11 +137,11 @@ namespace FightClubLogic.Tests
 
             fighter.GetHit(BodyPart.Body, 5);
             Assert.AreEqual(eventRecieved, true);
-            
+
             eventRecieved = false;
             fighter.GetHit(BodyPart.Body, -10);
             Assert.AreEqual(eventRecieved, false);
-            
+
             eventRecieved = false;
             fighter.GetHit(BodyPart.Body, 0);
             Assert.AreEqual(eventRecieved, true);
@@ -175,7 +175,7 @@ namespace FightClubLogic.Tests
             {
                 eventRecieved = true;
             };
-            
+
             fighter.GetHit(BodyPart.Body, 1000);
             Assert.AreEqual(eventRecieved, true);
         }
@@ -190,7 +190,7 @@ namespace FightClubLogic.Tests
             {
                 eventRecieved = true;
             };
-            
+
             fighter.GetHit(BodyPart.Body, 5);
             Assert.AreEqual(eventRecieved, false);
         }

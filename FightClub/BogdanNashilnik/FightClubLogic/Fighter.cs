@@ -13,11 +13,8 @@ namespace FightClubLogic
         private string imagePath = null;
         public delegate void HitEvent(Fighter sender);
         public delegate void HitEventWithDamage(Fighter sender, int damage);
-        [field: NonSerialized]
         public event HitEvent Block;
-        [field: NonSerialized]
         public event HitEventWithDamage Wound;
-        [field: NonSerialized]
         public event HitEvent Death;
 
         public BodyPart Blocked
@@ -46,6 +43,13 @@ namespace FightClubLogic
             get
             {
                 return hp;
+            }
+        }
+        public string HPFormatted
+        {
+            get
+            {
+                return this.hp + "/" + this.maxHP;
             }
         }
         public string Name
