@@ -82,15 +82,7 @@ namespace ISD_Course_Fight_club
             user.ResetHealth();
             computer.ResetHealth();
             defender = computer;
-
-            user.Wound += WriteToLogWounded;
-            user.Blocked += WriteToLogBlocked;
-            user.Death += WriteToLogDeath;
-            computer.Wound += WriteToLogWounded;
-            computer.Blocked += WriteToLogBlocked;
-            computer.Death += WriteToLogDeath;
-
-            log = new List<string>();
+            log.Clear();
             log.Add("Fight!");
         }
     }
