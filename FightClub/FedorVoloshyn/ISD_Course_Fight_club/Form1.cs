@@ -21,7 +21,6 @@ namespace ISD_Course_Fight_club
             InitializeComponent();
             gameProcess = new GameProcess();
             UpdateForm();
-            UnLockButtons();
             gameProcess.FightOver += GameOver;
         }
 

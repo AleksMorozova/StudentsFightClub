@@ -21,14 +21,8 @@ namespace ISD_Course_Fight_club
         protected string name;
         protected BodyPart blockedPart;
         protected int hp = 100;
-        public string Name
-        {
-            get { return name; }
-        }
-        public int Hp
-        {
-            get { return hp; }
-        }
+        public string Name { get { return name; } }
+        public int Hp { get { return hp; } }
 
         public event PlayerEvents Blocked;
         public event PlayerEvents Wound;
