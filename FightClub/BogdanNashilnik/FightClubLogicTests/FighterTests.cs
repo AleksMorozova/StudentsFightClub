@@ -95,7 +95,7 @@ namespace FightClubLogic.Tests
             fighter.SetBlock(BodyPart.Head);
             bool eventRecieved = false;
 
-            fighter.Block += delegate (Fighter sender)
+            fighter.Block += delegate (object sender, EventArgs e)
             {
                 eventRecieved = true;
             };
@@ -109,7 +109,7 @@ namespace FightClubLogic.Tests
             Fighter fighter = new Fighter("123", 15, 0);
             fighter.SetBlock(BodyPart.Head);
             bool eventRecieved = false;
-            fighter.Block += delegate (Fighter sender)
+            fighter.Block += delegate (object sender, EventArgs e)
             {
                 eventRecieved = true;
             };
@@ -130,7 +130,7 @@ namespace FightClubLogic.Tests
             Fighter fighter = new Fighter("123", 15, 0);
             fighter.SetBlock(BodyPart.Head);
             bool eventRecieved = false;
-            fighter.Wound += delegate (Fighter sender, int damage)
+            fighter.Wound += delegate (object sender, EventArgs e)
             {
                 eventRecieved = true;
             };
@@ -157,7 +157,7 @@ namespace FightClubLogic.Tests
             Fighter fighter = new Fighter("123", 15, 0);
             fighter.SetBlock(BodyPart.Head);
             bool eventRecieved = false;
-            fighter.Wound += delegate (Fighter sender, int damage)
+            fighter.Wound += delegate (object sender, EventArgs e)
             {
                 eventRecieved = true;
             };
@@ -171,7 +171,7 @@ namespace FightClubLogic.Tests
             Fighter fighter = new Fighter("123", 15, 0);
             fighter.SetBlock(BodyPart.Head);
             bool eventRecieved = false;
-            fighter.Death += delegate (Fighter sender)
+            fighter.Death += delegate (object sender, EventArgs e)
             {
                 eventRecieved = true;
             };
@@ -186,7 +186,7 @@ namespace FightClubLogic.Tests
             Fighter fighter = new Fighter("123", 15, 0);
             fighter.SetBlock(BodyPart.Head);
             bool eventRecieved = false;
-            fighter.Death += delegate (Fighter sender)
+            fighter.Death += delegate (object sender, EventArgs e)
             {
                 eventRecieved = true;
             };

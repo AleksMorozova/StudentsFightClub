@@ -47,10 +47,10 @@ namespace ISD.FightClub
         {
             this.battle = new Battle(fighter1, fighter2);
             log = new List<string>();
-            this.Subscribe();
+            this.SubscribeToFightersEvents();
             if (initGUI)
             {
-                view.InitializeGUI();
+                view.SetBindings();
             }
             this.AddToLog("Битва началась " + DateTime.Now + ".");
             this.NotifyPropertyChanged();
@@ -58,10 +58,7 @@ namespace ISD.FightClub
         public void InitializeLoadedBattle(Presenter presenter)
         {
             this.battle = presenter.battle;
-            this.battle.Fighter1.Block += Fighter_Block;
-            this.battle.Fighter1.Wound += Fighter_Wound;
-            this.battle.Fighter2.Block += Fighter_Block;
-            this.battle.Fighter2.Wound += Fighter_Wound;
+            this.SubscribeToFightersEvents();
             this.log.Clear();
             foreach (string logRecord in presenter.log)
             {
@@ -70,7 +67,7 @@ namespace ISD.FightClub
             this.NotifyPropertyChanged();
         }
 
-        private void Subscribe()
+        private void SubscribeToFightersEvents()
         {
             this.battle.Fighter1.Block += Fighter_Block;
             this.battle.Fighter1.Wound += Fighter_Wound;
@@ -79,9 +76,10 @@ namespace ISD.FightClub
             this.battle.Fighter2.Wound += Fighter_Wound;
             this.battle.Fighter2.Death += Fighter_Death;
         }
-        private void Fighter_Death(Fighter sender)
+        private void Fighter_Death(object sender, EventArgs e)
         {
-            this.AddToLog("Боец " + sender.Name + " погиб.");
+            FighterEventArgs eventArgs = (FighterEventArgs)e;
+            this.AddToLog("Боец " + eventArgs.Name + " погиб.");
             this.AddToLog("Бой закончился " + DateTime.Now + " за " + this.battle.Round + " раундов.");
             this.SaveLog();
 
@@ -89,13 +87,16 @@ namespace ISD.FightClub
             MessageBox.Show("Победил " + winner.Name + "!");
             Application.Exit();
         }
-        private void Fighter_Wound(Fighter sender, int damage)
+        private void Fighter_Wound(object sender, EventArgs e)
         {
-            this.AddToLog("Бойцу " + sender.Name + " нанесли " + damage + " урона. Текущее здоровье: " + sender.HP + "/" + sender.MaxHP + ".");
+            FighterEventArgs eventArgs = (FighterEventArgs)e;
+            this.AddToLog("Бойцу " + eventArgs.Name + " нанесли " + eventArgs.DamageTaken + " урона. Текущее здоровье: " +
+                    eventArgs.HP + "/" + eventArgs.MaxHP + ".");
         }
-        private void Fighter_Block(Fighter sender)
+        private void Fighter_Block(object sender, EventArgs e)
         {
-            this.AddToLog(sender.Name + " заблокировал удар в " + sender.Blocked + ".");
+            FighterEventArgs eventArgs = (FighterEventArgs)e;
+            this.AddToLog(eventArgs.Name + " заблокировал удар в " + eventArgs.Blocked + ".");
         }
         
         public void Action(BodyPart bodyPart)
@@ -104,11 +105,11 @@ namespace ISD.FightClub
             this.NotifyPropertyChanged();
         }
 
-        public static CPUFighter CreateFighterNoobSaibot()
+        public static CPUFighter CreateCPUFighter()
         {
             return new CPUFighter("Noob Saibot", 30, 5, "resources/noobsaibot.png");
         }
-        public static Fighter CreateFighterScorpion()
+        public static Fighter CreateFighter()
         {
             return new Fighter("Scorpion", 15, 10, "resources/scorpion.png");
         }
