@@ -11,17 +11,16 @@ namespace ISD.FightClub
     {
         private Presenter presenter;
         private BindingSource bindingBattle = new BindingSource();
+
         public FormView()
         {
             InitializeComponent();
             log.Text = "";
-
+            
             presenter = new Presenter(this);
-            presenter.InitializeNewBattle(Presenter.CreateFighterScorpion(), Presenter.CreateFighterNoobSaibot(), true);
+            presenter.InitializeNewBattle(Presenter.CreateFighter(), Presenter.CreateCPUFighter(), true);
         }
-
-
-        public void InitializeGUI()
+        public void SetBindings()
         {
             bindingBattle.DataSource = presenter;
 
@@ -79,7 +78,7 @@ namespace ISD.FightClub
         }
         private void новаяИграToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            presenter.InitializeNewBattle(Presenter.CreateFighterScorpion(), Presenter.CreateFighterNoobSaibot(), false);
+            presenter.InitializeNewBattle(Presenter.CreateFighter(), Presenter.CreateCPUFighter(), false);
         }
         private void сохранитьБойВФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {

@@ -6,8 +6,8 @@ namespace FightClubLogic
     public class Battle
     {
         private Fighter humanFighter;
-        private CPUFighter cpuFighter;
-        private int round;
+        private Fighter cpuFighter;
+        private int round = 1;
         private RoundHalf roundHalf = RoundHalf.HumanAttack;
         private Random rng = new Random();
 
@@ -18,7 +18,7 @@ namespace FightClubLogic
                 return humanFighter;
             }
         }
-        public CPUFighter Fighter2
+        public Fighter Fighter2
         {
             get
             {
@@ -40,36 +40,27 @@ namespace FightClubLogic
             }
         }
 
-        public Battle(Fighter fighter1, CPUFighter fighter2)
+        public Battle(Fighter fighter1, Fighter fighter2)
         {
             this.humanFighter = fighter1;
             this.cpuFighter = fighter2;
-            this.round = 1;
         }
 
         public void Action(BodyPart bodyPart)
         {
             if (this.roundHalf == RoundHalf.HumanAttack)
             {
-                this.cpuFighter.SetBlock();
+                (this.cpuFighter as CPUFighter).SetBlock();
                 this.cpuFighter.GetHit(bodyPart, humanFighter.Damage);
                 this.roundHalf = RoundHalf.CPUAttack;
             }
             else
             {
                 this.humanFighter.SetBlock(bodyPart);
-                this.humanFighter.GetHit(cpuFighter.GenerateBodyPart(), cpuFighter.Damage);
+                this.humanFighter.GetHit((this.cpuFighter as CPUFighter).GenerateBodyPart(), cpuFighter.Damage);
                 this.roundHalf = RoundHalf.HumanAttack;
                 this.round++;
             }
-        }
-
-        public void LoadBattle(Battle battle)
-        {
-            this.round = battle.round;
-            this.humanFighter = battle.Fighter1;
-            this.cpuFighter = battle.Fighter2;
-            this.roundHalf = battle.RoundHalf;
         }
     }
 }
