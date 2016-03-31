@@ -67,6 +67,11 @@ namespace ISD_Course_Fight_club
             this.blockedPart = blockedPart;
         }
 
+        public void ResetHealth()
+        {
+            this.hp = 100;
+        }
+
         public BodyPart GetRandomBodyPart()
         {
             Random rand = new Random();

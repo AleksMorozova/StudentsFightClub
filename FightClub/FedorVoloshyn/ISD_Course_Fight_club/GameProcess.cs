@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ISD_Course_Fight_club
 {
-    [Serializable()]
+    [Serializable]
     class GameProcess
     {
         private Player user;
@@ -16,6 +16,11 @@ namespace ISD_Course_Fight_club
 
         [field: NonSerialized]
         public event PlayerEvents FightOver;
+
+        public int UserHP { get { return user.Hp; } }
+        public int ComputerHP { get { return computer.Hp; } }
+        public string Defender { get { return defender.Name; } }
+        public List<string> Log { get { return log; } }
 
         public GameProcess()
         {
@@ -55,18 +60,6 @@ namespace ISD_Course_Fight_club
             ChangeAttacker();
         }
 
-        public int GetUserHP()
-        {
-            return user.Hp;
-        }
-        public int GetComputerHP()
-        {
-            return computer.Hp;
-        }
-        public string GetDefender()
-        {
-            return defender.Name;
-        }
         private void WriteToLogWounded(string name, int health)
         {
             string roundResult = name + " wounded! HP: " + health.ToString();
@@ -83,10 +76,6 @@ namespace ISD_Course_Fight_club
         {
             string roundResult = name + " blocked punch! HP: " + health.ToString();
             log.Add(roundResult);
-        }
-        public List<string> GetLog()
-        {
-            return log;
         }
         public void Reset()
         {
