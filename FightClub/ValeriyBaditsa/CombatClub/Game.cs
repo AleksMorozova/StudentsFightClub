@@ -38,7 +38,7 @@ namespace CombatClub
             }
             else
             {
-                player.OnDeath();
+                player.BlockEvent();
                 FinishGame();               
             }
         }
@@ -81,11 +81,8 @@ namespace CombatClub
                 computerPlayer.SetBlock();
                 player.GetHit(bodyPart);
                 if (computerPlayer.Blocked == player.Attacked)
-                {
-                    //computerPlayer.BlockEvent(new PlayerEventArgs(computerPlayer.Name, computerPlayer.Hp));
-                    computerPlayer.OnBlock();
-                    //computerPlayer.Name, computerPlayer.Hp
-                    new PlayerEventArgs(computerPlayer.Name, computerPlayer.Hp);
+                {                   
+                    computerPlayer.BlockEvent();                                     
                 }
                 else
                 {
@@ -94,7 +91,7 @@ namespace CombatClub
                         if (computerPlayer.Hp > 0)
                         {
                             computerPlayer.Hp--;
-                            computerPlayer.OnWound();
+                            computerPlayer.WoundEvent();
                         }                        
                     }
                 }
@@ -109,7 +106,7 @@ namespace CombatClub
                     if (player.Blocked == computerPlayer.Attacked)
                     {
                         //player.BlockEvent(new PlayerEventArgs(player.Name, player.Hp));
-                        player.OnBlock();
+                        player.BlockEvent();
                         //new PlayerEventArgs(player.Name, player.Hp)
                     }
                     else
@@ -118,10 +115,10 @@ namespace CombatClub
                             if (player.Hp > 0)
                             {
                                 player.Hp--;
-                                player.OnWound();
+                                player.WoundEvent();
                             }
                             else
-                                player.OnDeath();
+                                player.DeathEvent();
                         }
                     ChangeRoles(player);
                        

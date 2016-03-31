@@ -18,39 +18,14 @@ namespace CombatClub
         public int Hp {get; set;}      
         int Damage { get; set; }
         public bool Attacker { get; set; }
-        public BodyParts Attacked { get; set; }
-        
-        //public Player(string name)
-        //{
-        //    this.Name = name;
-        //    Hp = startHp;            
-        //    this.Attacker = true;
-        //}
+        public BodyParts Attacked { get; set; }              
 
         public Player(string name, int hp)
         {
             this.Name = name;
             this.Hp = hp;
             this.Attacker = true;
-        }
-
-        //public void BlockEvent(PlayerEventArgs e)
-        //{
-        //    if (Block != null)
-        //        Block(this,e);
-        //}
-
-        //public void WoundEvent(PlayerEventArgs e)
-        //{
-        //    if (Wound != null)
-        //        Wound(this, e);
-        //}
-
-        //public void DeathEvent(PlayerEventArgs e)
-        //{
-        //    if (Death != null)
-        //       Death(this, e);
-        //}
+        }        
 
         public bool CompareParts(Player player, ComputerPlayer compPlayer)
         {
@@ -58,44 +33,56 @@ namespace CombatClub
         }
 
         public void GetHit(BodyParts bodyPartAttack)
-        {
-            Attacked = bodyPartAttack;            
+        {           
+            Attacked = bodyPartAttack;                        
         }
 
         public void SetBlock(BodyParts bodyPartBlock)
         {
             Blocked = bodyPartBlock;            
         }
-        
-        //public event Del Block;
-        //public event Del Wound;
-        //public event Del Death;
+              
         public event EventHandler<PlayerEventArgs> Block;
         public event EventHandler<PlayerEventArgs> Wound;
         public event EventHandler<PlayerEventArgs> Death;
 
-        public void OnBlock()
+        protected void OnBlock(PlayerEventArgs e)
         {           
             if (Block != null)
             {
-                Block(this, new PlayerEventArgs(this.Name, this.Hp));                
+                Block(this, e);                
             }
         }
 
-        public void OnWound()
+        protected void OnWound(PlayerEventArgs e)
         {          
             if (Wound != null)
             {
-                Wound(this, new PlayerEventArgs(this.Name, this.Hp));               
+                Wound(this, e);               
             }
         }
 
-        public void OnDeath()
+        protected void OnDeath(PlayerEventArgs e)
         {
             if (Death != null)
             {
-                Death(this, new PlayerEventArgs(this.Name, this.Hp));
+                Death(this, e);
             }
+        }
+
+        public void BlockEvent()
+        {
+            OnBlock(new PlayerEventArgs(this.Name, this.Hp));
+        }
+
+        public void WoundEvent()
+        {
+            OnWound(new PlayerEventArgs(this.Name, this.Hp));
+        }
+
+        public void DeathEvent()
+        {
+            OnDeath(new PlayerEventArgs(this.Name, this.Hp));
         }
     }
 }

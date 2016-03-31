@@ -20,8 +20,6 @@ namespace CombatClub
         public Button b2 { get; set; }
         public Button b3 { get; set; }
 
-
-
         public Game(string playerName, string compName,
             ListBox listBox,
             Label labelPlayerName, Label labelCompName,
