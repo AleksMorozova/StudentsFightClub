@@ -1,66 +1,53 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using FightClubLogic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections.Generic;
 
 namespace ISD.FightClub
 {
-    public partial class FormView : Form, IView
+    public partial class FormView : Form
     {
-        Presenter presenter;
+        private Presenter presenter;
+        private BindingSource bindingBattle = new BindingSource();
         public FormView()
         {
             InitializeComponent();
             log.Text = "";
 
             presenter = new Presenter(this);
-            StartNewGame();
+            presenter.InitializeNewBattle(Presenter.CreateFighterScorpion(), Presenter.CreateFighterNoobSaibot(), true);
         }
 
-        private void StartNewGame()
-        {
-            presenter.InitializeNewBattle(Presenter.CreateFighterScorpion(), Presenter.CreateFighterNoobSaibot());
-            this.log.Items.Clear();
-        }
-        public void InitializeGUI(Fighter fighter1, Fighter fighter2)
-        {
-            SetFighterGUI(fighter1, pictureBoxLeftFighter, labelLeftFighter, labelHPLeftFighter, progressBarLeftFighter, GuiPosition.Left);
-            SetFighterGUI(fighter2, pictureBoxRightFighter, labelRightFighter, labelHPRightFighter, progressBarRightFighter, GuiPosition.Right);
-            Subscribe();
-            this.Battle_RoundChanged(presenter.Battle);
-            this.Battle_RoundHalfChanged(presenter.Battle);
-        }
-        public void EndGame(Fighter winner)
-        {
-            MessageBox.Show("Победил " + winner.Name + "!");
-            Application.Exit();
-        }
-        private void Subscribe()
-        {
-            presenter.Logging += Presenter_Logging;
 
-            presenter.Battle.RoundChanged += Battle_RoundChanged;
-            presenter.Battle.RoundHalfChanged += Battle_RoundHalfChanged;
-
-            presenter.Battle.Fighter1.Wound += Fighter1_Wound;
-            presenter.Battle.Fighter2.Wound += Fighter2_Wound;
-        }
-
-        private void SetFighterGUI(FightClubLogic.Fighter fighter, PictureBox pb, Label lbName, Label lbHP, ProgressBar hpBar, GuiPosition pos)
+        public void InitializeGUI()
         {
-            lbName.Text = fighter.Name;
-            lbHP.Text = fighter.HP.ToString() + "/" + fighter.MaxHP.ToString();
-            hpBar.Maximum = fighter.MaxHP;
-            hpBar.Value = fighter.HP;
+            bindingBattle.DataSource = presenter;
+
+            labelLeftFighter.DataBindings.Add("Text", bindingBattle, "Battle.Fighter1.Name");
+            labelHPLeftFighter.DataBindings.Add("Text", bindingBattle, "Battle.Fighter1.HPFormatted");
+            progressBarLeftFighter.DataBindings.Add("Maximum", bindingBattle, "Battle.Fighter1.MaxHP");
+            progressBarLeftFighter.DataBindings.Add("Value", bindingBattle, "Battle.Fighter1.HP");
+            TrySetImage(pictureBoxLeftFighter, presenter.Battle.Fighter1.ImagePath);
+
+            labelRightFighter.DataBindings.Add("Text", bindingBattle, "Battle.Fighter2.Name");
+            labelHPRightFighter.DataBindings.Add("Text", bindingBattle, "Battle.Fighter2.HPFormatted");
+            progressBarRightFighter.DataBindings.Add("Maximum", bindingBattle, "Battle.Fighter2.MaxHP");
+            progressBarRightFighter.DataBindings.Add("Value", bindingBattle, "Battle.Fighter2.HP");
+            TrySetImage(pictureBoxRightFighter, presenter.Battle.Fighter2.ImagePath);
+            pictureBoxRightFighter.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+            labelRoundCount.DataBindings.Add("Text", bindingBattle, "Battle.Round");
+            labelAction.DataBindings.Add("Text", bindingBattle, "WhatToDo");
+            
+            bindingBattle.CurrentItemChanged += BindingBattle_CurrentChanged;
+        }
+        private void TrySetImage(PictureBox pb, string imagePath)
+        {
             try
             {
-                pb.Image = Image.FromFile(fighter.ImagePath);
-                if (pos == GuiPosition.Right)
-                {
-                    pb.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
-                }
+                pb.Image = Image.FromFile(imagePath);
             }
             catch
             {
@@ -68,33 +55,14 @@ namespace ISD.FightClub
             }
         }
 
-        private void Fighter2_Wound(FightClubLogic.Fighter sender, int damage)
+        private void BindingBattle_CurrentChanged(object sender, EventArgs e)
         {
-            progressBarRightFighter.Value = sender.HP;
-            labelHPRightFighter.Text = sender.HP + "/" + sender.MaxHP;
-        }
-        private void Fighter1_Wound(FightClubLogic.Fighter sender, int damage)
-        {
-            progressBarLeftFighter.Value = sender.HP;
-            labelHPLeftFighter.Text = sender.HP + "/" + sender.MaxHP;
-        }
-        private void Battle_RoundChanged(FightClubLogic.Battle sender)
-        {
-            labelRound.Text = "Раунд " + sender.Round;
-        }
-        private void Presenter_Logging(string data)
-        {
-            log.Items.Add(data + "\n");
-        }
-        private void Battle_RoundHalfChanged(FightClubLogic.Battle sender)
-        {
-            if (sender.RoundHalf == RoundHalf.Attack)
+            List<string> logList = ((Presenter)((BindingSource)sender).Current).Log;
+
+            log.Items.Clear();
+            foreach (string logItem in logList)
             {
-                labelAction.Text = "Куда будем бить?";
-            }
-            else
-            {
-                labelAction.Text = "Что будем защищать?";
+                log.Items.Add(logItem);
             }
         }
         private void buttonHead_Click(object sender, EventArgs e)
@@ -111,8 +79,7 @@ namespace ISD.FightClub
         }
         private void новаяИграToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            presenter.Logging -= Presenter_Logging;
-            StartNewGame();
+            presenter.InitializeNewBattle(Presenter.CreateFighterScorpion(), Presenter.CreateFighterNoobSaibot(), false);
         }
         private void сохранитьБойВФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -136,8 +103,6 @@ namespace ISD.FightClub
                     try
                     {
                         Presenter loadedPresenter = (Presenter)bf.Deserialize(fs);
-                        this.log.Items.Clear();
-                        presenter.Logging -= Presenter_Logging;
                         presenter.InitializeLoadedBattle(loadedPresenter);
                     }
                     catch

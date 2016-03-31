@@ -5,43 +5,24 @@ namespace FightClubLogic
     [Serializable]
     public class Battle
     {
-        private Fighter attacker;
-        private Fighter defender;
-        private int round = 1;
-        private RoundHalf roundHalf = RoundHalf.Attack;
+        private Fighter humanFighter;
+        private CPUFighter cpuFighter;
+        private int round;
+        private RoundHalf roundHalf = RoundHalf.HumanAttack;
         private Random rng = new Random();
-        public delegate void RoundChange(Battle sender);
-        [field: NonSerialized]
-        public event RoundChange RoundChanged;
-        [field: NonSerialized]
-        public event RoundChange RoundHalfChanged;
 
         public Fighter Fighter1
         {
             get
             {
-                if (this.roundHalf == RoundHalf.Attack)
-                {
-                    return attacker;
-                }
-                else
-                {
-                    return defender;
-                }
+                return humanFighter;
             }
         }
-        public Fighter Fighter2
+        public CPUFighter Fighter2
         {
             get
             {
-                if (this.roundHalf == RoundHalf.Attack)
-                {
-                    return defender;
-                }
-                else
-                {
-                    return attacker;
-                }
+                return cpuFighter;
             }
         }
         public int Round
@@ -59,53 +40,36 @@ namespace FightClubLogic
             }
         }
 
-        public Battle(Fighter fighter1, Fighter fighter2)
+        public Battle(Fighter fighter1, CPUFighter fighter2)
         {
-            this.attacker = fighter1;
-            this.defender = fighter2;
+            this.humanFighter = fighter1;
+            this.cpuFighter = fighter2;
+            this.round = 1;
         }
 
-        public void Action(BodyPart bodyPartAttack, BodyPart bodyPartDefend)
+        public void Action(BodyPart bodyPart)
         {
-            this.defender.SetBlock(bodyPartDefend);
-            this.defender.GetHit(bodyPartAttack, attacker.Damage);
-            Fighter swapFighters = this.attacker;
-            this.attacker = this.defender;
-            this.defender = swapFighters;
-            if (this.roundHalf == RoundHalf.Attack)
+            if (this.roundHalf == RoundHalf.HumanAttack)
             {
-                this.roundHalf = RoundHalf.Defend;
-                if (this.RoundHalfChanged != null)
-                {
-                    this.RoundHalfChanged(this);
-                }
+                this.cpuFighter.SetBlock();
+                this.cpuFighter.GetHit(bodyPart, humanFighter.Damage);
+                this.roundHalf = RoundHalf.CPUAttack;
             }
             else
             {
-                this.roundHalf = RoundHalf.Attack;
-                if (this.RoundHalfChanged != null)
-                {
-                    this.RoundHalfChanged(this);
-                }
+                this.humanFighter.SetBlock(bodyPart);
+                this.humanFighter.GetHit(cpuFighter.GenerateBodyPart(), cpuFighter.Damage);
+                this.roundHalf = RoundHalf.HumanAttack;
                 this.round++;
-                if (this.RoundChanged != null)
-                {
-                    this.RoundChanged(this); 
-                }
             }
         }
-        public void AttackCPU(BodyPart bodyPartAttack)
+
+        public void LoadBattle(Battle battle)
         {
-            this.Action(bodyPartAttack, GenerateBodyPart());
-        }
-        public void DefendFromCPU(BodyPart bodyPartDefend)
-        {
-            this.Action(GenerateBodyPart(), bodyPartDefend);
-        }
-        private BodyPart GenerateBodyPart()
-        {
-            int totalBodyParts = Enum.GetValues(typeof(BodyPart)).Length;
-            return (BodyPart)rng.Next(0, totalBodyParts);
+            this.round = battle.round;
+            this.humanFighter = battle.Fighter1;
+            this.cpuFighter = battle.Fighter2;
+            this.roundHalf = battle.RoundHalf;
         }
     }
 }

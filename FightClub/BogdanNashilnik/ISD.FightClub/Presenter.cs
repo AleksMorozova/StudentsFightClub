@@ -1,20 +1,21 @@
 ﻿using System;
-using System.Text;
 using FightClubLogic;
 using System.IO;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 
 namespace ISD.FightClub
 {
     [Serializable]
-    public class Presenter : ILogable
+    public class Presenter : INotifyPropertyChanged
     {
         private Battle battle;
         [NonSerialized]
-        private IView view;
-        private List<string> log = new List<string>();
-        [field: NonSerialized]
-        public event Log Logging;
+        private FormView view;
+        private List<string> log;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Battle Battle
         {
@@ -30,28 +31,43 @@ namespace ISD.FightClub
                 return log;
             }
         }
-        
-        public Presenter(IView view)
+        public string WhatToDo
+        {
+            get
+            {
+                return this.battle.RoundHalf == RoundHalf.HumanAttack ? "Куда будем бить?" : "Что будем защищать?";
+            }
+        }
+
+        public Presenter(FormView view)
         {
             this.view = view;
         }
-        public void InitializeNewBattle(Fighter fighter1, Fighter fighter2)
+        public void InitializeNewBattle(Fighter fighter1, CPUFighter fighter2, bool initGUI)
         {
             this.battle = new Battle(fighter1, fighter2);
+            log = new List<string>();
             this.Subscribe();
-            view.InitializeGUI(fighter1, fighter2);
+            if (initGUI)
+            {
+                view.InitializeGUI();
+            }
             this.AddToLog("Битва началась " + DateTime.Now + ".");
+            this.NotifyPropertyChanged();
         }
         public void InitializeLoadedBattle(Presenter presenter)
         {
             this.battle = presenter.battle;
-            this.Subscribe();
-            view.InitializeGUI(this.Battle.Fighter1, this.battle.Fighter2);
+            this.battle.Fighter1.Block += Fighter_Block;
+            this.battle.Fighter1.Wound += Fighter_Wound;
+            this.battle.Fighter2.Block += Fighter_Block;
+            this.battle.Fighter2.Wound += Fighter_Wound;
             this.log.Clear();
             foreach (string logRecord in presenter.log)
             {
                 this.AddToLog(logRecord);
             }
+            this.NotifyPropertyChanged();
         }
 
         private void Subscribe()
@@ -70,7 +86,8 @@ namespace ISD.FightClub
             this.SaveLog();
 
             Fighter winner = (sender == this.battle.Fighter1) ? this.battle.Fighter2 : this.battle.Fighter1;
-            view.EndGame(winner);
+            MessageBox.Show("Победил " + winner.Name + "!");
+            Application.Exit();
         }
         private void Fighter_Wound(Fighter sender, int damage)
         {
@@ -83,19 +100,13 @@ namespace ISD.FightClub
         
         public void Action(BodyPart bodyPart)
         {
-            if (this.battle.RoundHalf == RoundHalf.Attack)
-            {
-                this.battle.AttackCPU(bodyPart);
-            }
-            else
-            {
-                this.battle.DefendFromCPU(bodyPart);
-            }
+            this.battle.Action(bodyPart);
+            this.NotifyPropertyChanged();
         }
 
-        public static Fighter CreateFighterNoobSaibot()
+        public static CPUFighter CreateFighterNoobSaibot()
         {
-            return new Fighter("Noob Saibot", 30, 5, "resources/noobsaibot.png");
+            return new CPUFighter("Noob Saibot", 30, 5, "resources/noobsaibot.png");
         }
         public static Fighter CreateFighterScorpion()
         {
@@ -110,15 +121,11 @@ namespace ISD.FightClub
             return new Fighter(name, maxHP, damage, imagePath);
         }
 
-        public void AddToLog(string data)
+        private void AddToLog(string data)
         {
             this.log.Add(data);
-            if (this.Logging != null)
-            {
-                this.Logging(data);
-            }
         }
-        public void SaveLog()
+        private void SaveLog()
         {
             using (FileStream fs = new FileStream("log.txt", FileMode.Append))
             {
@@ -132,5 +139,13 @@ namespace ISD.FightClub
                 }
             }
         }
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
     }
 }
