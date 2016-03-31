@@ -51,6 +51,7 @@
             this.сохранитьБойВФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialogSaveBattle = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialogOpenBattle = new System.Windows.Forms.OpenFileDialog();
+            this.labelRoundCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLeftFighter)).BeginInit();
             this.panelLeftFighter.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -177,6 +178,7 @@
             this.panelControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelControl.Controls.Add(this.labelRoundCount);
             this.panelControl.Controls.Add(this.log);
             this.panelControl.Controls.Add(this.labelAction);
             this.panelControl.Controls.Add(this.labelRound);
@@ -213,11 +215,11 @@
             this.labelRound.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.labelRound.AutoSize = true;
             this.labelRound.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelRound.Location = new System.Drawing.Point(3, 6);
+            this.labelRound.Location = new System.Drawing.Point(3, 7);
             this.labelRound.Name = "labelRound";
-            this.labelRound.Size = new System.Drawing.Size(68, 20);
+            this.labelRound.Size = new System.Drawing.Size(55, 20);
             this.labelRound.TabIndex = 3;
-            this.labelRound.Text = "Раунд 1";
+            this.labelRound.Text = "Раунд";
             // 
             // buttonLegs
             // 
@@ -297,6 +299,17 @@
             // 
             this.openFileDialogOpenBattle.Filter = "Битва|*btl*";
             // 
+            // labelRoundCount
+            // 
+            this.labelRoundCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelRoundCount.AutoSize = true;
+            this.labelRoundCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelRoundCount.Location = new System.Drawing.Point(55, 7);
+            this.labelRoundCount.Name = "labelRoundCount";
+            this.labelRoundCount.Size = new System.Drawing.Size(18, 20);
+            this.labelRoundCount.TabIndex = 7;
+            this.labelRoundCount.Text = "1";
+            // 
             // FormView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -349,6 +362,7 @@
         private System.Windows.Forms.ToolStripMenuItem сохранитьБойВФайлToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialogSaveBattle;
         private System.Windows.Forms.OpenFileDialog openFileDialogOpenBattle;
+        private System.Windows.Forms.Label labelRoundCount;
     }
 }
 

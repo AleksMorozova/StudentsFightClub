@@ -11,12 +11,11 @@ namespace FightClubLogic
         private int damage;
         private BodyPart blocked;
         private string imagePath = null;
-        public delegate void HitEvent(Fighter sender);
-        public delegate void HitEventWithDamage(Fighter sender, int damage);
+        public delegate void HitEvent(object sender, EventArgs e);
         [field: NonSerialized]
         public event HitEvent Block;
         [field: NonSerialized]
-        public event HitEventWithDamage Wound;
+        public event HitEvent Wound;
         [field: NonSerialized]
         public event HitEvent Death;
 
@@ -46,6 +45,13 @@ namespace FightClubLogic
             get
             {
                 return hp;
+            }
+        }
+        public string HPFormatted
+        {
+            get
+            {
+                return this.hp + "/" + this.maxHP;
             }
         }
         public string Name
@@ -94,7 +100,7 @@ namespace FightClubLogic
             {
                 if (this.Block != null)
                 {
-                    this.Block(this);
+                    this.Block(this, new FighterEventArgs(this));
                 }
             }
             else if (damage < this.hp)
@@ -102,7 +108,7 @@ namespace FightClubLogic
                 this.hp -= damage;
                 if (this.Wound != null)
                 {
-                    this.Wound(this, damage);
+                    this.Wound(this, new FighterEventArgs(this, damage));
                 }
             }
             else
@@ -110,11 +116,11 @@ namespace FightClubLogic
                 this.hp = 0;
                 if (this.Wound != null)
                 {
-                    this.Wound(this, damage);
+                    this.Wound(this, new FighterEventArgs(this, damage));
                 }
                 if (this.Death != null)
                 {
-                    this.Death(this);
+                    this.Death(this, new FighterEventArgs(this));
                 }
             }
         }
