@@ -79,8 +79,8 @@ namespace ISD_Course_Fight_club
         }
         public void Reset()
         {
-            user = new Player("User");
-            computer = new Player("Computer");
+            user.ResetHealth();
+            computer.ResetHealth();
             defender = computer;
 
             user.Wound += WriteToLogWounded;
