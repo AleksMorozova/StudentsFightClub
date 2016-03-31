@@ -27,20 +27,20 @@ namespace ISD_Course_Fight_club
 
         private void UpdateForm()
         {
-            if (gameProcess.GetDefender() == "User")
+            if (gameProcess.Defender == "User")
                 actionLabel.Text = "Protect!";
             else
                 actionLabel.Text = "Attack!";
 
-            progressBarCompPlayerHP.Value = gameProcess.GetComputerHP();
-            progressBarPlayerHP.Value = gameProcess.GetUserHP();
+            progressBarCompPlayerHP.Value = gameProcess.ComputerHP;
+            progressBarPlayerHP.Value = gameProcess.UserHP;
             UpdateLog();
         }
 
         private void UpdateLog()
         {
             logShow.Clear();
-            logShow.Lines = gameProcess.GetLog().ToArray();
+            logShow.Lines = gameProcess.Log.ToArray();
         }
 
         private void GameOver(string name, int health)
@@ -60,7 +60,7 @@ namespace ISD_Course_Fight_club
             logFileName = logFileName.Replace(':', '_');
             logFileName = logFileName.Replace('.', '_');
             logFileName += ".txt";
-            File.WriteAllLines(logFileName, gameProcess.GetLog().ToArray());
+            File.WriteAllLines(logFileName, gameProcess.Log.ToArray());
             MessageBox.Show("Your file is saved as '" + logFileName + "'", "Done.", MessageBoxButtons.OK);
         }
 
@@ -102,10 +102,9 @@ namespace ISD_Course_Fight_club
 
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            gameProcess.Reset();
-            buttonBody.Enabled = true;
-            buttonHead.Enabled = true;
-            buttonLegs.Enabled = true;
+            gameProcess = new GameProcess();
+            gameProcess.FightOver += GameOver;
+            UnLockButtons();
             UpdateForm();
         }
 
