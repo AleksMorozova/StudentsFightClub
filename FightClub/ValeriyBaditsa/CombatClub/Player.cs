@@ -8,20 +8,9 @@ namespace CombatClub
 {     
     enum BodyParts {head, body, legs};
 
-    public class EventsArgs : EventArgs
-    {
-        public string name { get; set; }
-        public int Hp { get; set; }
-        public EventsArgs(string name, int hp)
-        {
-            this.name = name;
-            this.Hp = hp;
-        }
-    }
-
     class Player
     {    
-        public delegate void Del(object sender, EventsArgs args);        
+        public delegate void Del(object sender, PlayerEventArgs args);        
         const int startHp = 10;
 
         public string Name { get; set; }
@@ -30,33 +19,38 @@ namespace CombatClub
         int Damage { get; set; }
         public bool Attacker { get; set; }
         public BodyParts Attacked { get; set; }
+        
+        //public Player(string name)
+        //{
+        //    this.Name = name;
+        //    Hp = startHp;            
+        //    this.Attacker = true;
+        //}
 
-        public Player() { }
-
-        public Player(string name)
+        public Player(string name, int hp)
         {
             this.Name = name;
-            Hp = startHp;            
+            this.Hp = hp;
             this.Attacker = true;
         }
 
-        public void BlockEvent(EventsArgs e)
-        {
-            if (Block != null)
-                Block(this,e);
-        }
+        //public void BlockEvent(PlayerEventArgs e)
+        //{
+        //    if (Block != null)
+        //        Block(this,e);
+        //}
 
-        public void WoundEvent(EventsArgs e)
-        {
-            if (Wound != null)
-                Wound(this, e);
-        }
+        //public void WoundEvent(PlayerEventArgs e)
+        //{
+        //    if (Wound != null)
+        //        Wound(this, e);
+        //}
 
-        public void DeathEvent(EventsArgs e)
-        {
-            if (Death != null)
-               Death(this, e);
-        }
+        //public void DeathEvent(PlayerEventArgs e)
+        //{
+        //    if (Death != null)
+        //       Death(this, e);
+        //}
 
         public bool CompareParts(Player player, ComputerPlayer compPlayer)
         {
@@ -73,8 +67,35 @@ namespace CombatClub
             Blocked = bodyPartBlock;            
         }
         
-        public event Del Block;
-        public event Del Wound;
-        public event Del Death;
+        //public event Del Block;
+        //public event Del Wound;
+        //public event Del Death;
+        public event EventHandler<PlayerEventArgs> Block;
+        public event EventHandler<PlayerEventArgs> Wound;
+        public event EventHandler<PlayerEventArgs> Death;
+
+        public void OnBlock()
+        {           
+            if (Block != null)
+            {
+                Block(this, new PlayerEventArgs(this.Name, this.Hp));                
+            }
+        }
+
+        public void OnWound()
+        {          
+            if (Wound != null)
+            {
+                Wound(this, new PlayerEventArgs(this.Name, this.Hp));               
+            }
+        }
+
+        public void OnDeath()
+        {
+            if (Death != null)
+            {
+                Death(this, new PlayerEventArgs(this.Name, this.Hp));
+            }
+        }
     }
 }

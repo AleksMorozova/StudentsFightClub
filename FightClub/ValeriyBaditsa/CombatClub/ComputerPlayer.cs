@@ -6,37 +6,24 @@ using System.Threading.Tasks;
 
 namespace CombatClub
 {
-    class ComputerPlayer : Player
+    class  ComputerPlayer : Player
     {
         //new public int Hp;
         private Random rndm = new Random();
         private int numberBodyPart;
-        public ComputerPlayer() { }
-        public ComputerPlayer(string name) 
-             : base (name)
+        
+        public ComputerPlayer(string name, int hp) 
+             : base (name, hp)
         {            
             numberBodyPart = rndm.Next(3);
-            Blocked = (BodyParts)numberBodyPart;
-            Hp = 100;
+            Blocked = (BodyParts)numberBodyPart;            
         }
 
         
         public void GetHit()
         {
             numberBodyPart = rndm.Next(3);
-            Attacked = (BodyParts)numberBodyPart;
-            //if (((BodyParts)numberBodyPart == this.Blocked))
-            //    BlockEvent(new EventsArgs(this.Name, Player.Hp));
-            //else
-            //    if ((BodyParts)numberBodyPart != this.Blocked)
-            //    {
-            //        if (Player.Hp > 0)
-            //        {
-            //            Player.Hp--;
-            //            WoundEvent(new EventsArgs(this.Name, Player.Hp));
-            //        }
-            //        else DeathEvent(new EventsArgs(this.Name, Player.Hp));
-            //    }
+            Attacked = (BodyParts)numberBodyPart;           
         }
 
         // рандомный выбор защищаемой части тела
