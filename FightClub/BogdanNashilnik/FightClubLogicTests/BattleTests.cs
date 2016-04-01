@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace FightClubLogic.Tests
 {
@@ -46,6 +47,29 @@ namespace FightClubLogic.Tests
                     legsGenerated = true;
                 }
             } while (!(headGenerated && bodyGenerated && legsGenerated));
+        }
+        [TestMethod()]
+        public void BattleCanEnd()
+        {
+            Fighter f1 = new Fighter("123", 15, 5);
+            CPUFighter f2 = new CPUFighter("123", 15, 5);
+            Battle battle = new Battle(f1, f2);
+
+            bool eventRecieved = false;
+            battle.Fighter1.Death += delegate (object sender, EventArgs e)
+            {
+                eventRecieved = true;
+            };
+            battle.Fighter2.Death += delegate (object sender, EventArgs e)
+            {
+                eventRecieved = true;
+            };
+
+            while (!eventRecieved)
+            {
+                battle.Action(BodyPart.Head);
+            }
+            Assert.AreEqual(eventRecieved, true);
         }
     }
 }

@@ -7,40 +7,84 @@ using System.Collections.Generic;
 
 namespace ISD.FightClub
 {
-    public partial class FormView : Form
+    public partial class FormView : Form, IView
     {
-        private Presenter presenter;
-        private BindingSource bindingBattle = new BindingSource();
+        private IPresenter presenter;
+
+        public IPresenter Presenter
+        {
+            get
+            {
+                return this.presenter;
+            }
+
+            set
+            {
+                this.presenter = value;
+            }
+        }
 
         public FormView()
         {
             InitializeComponent();
-            log.Text = "";
-            
-            presenter = new Presenter(this);
-            presenter.InitializeNewBattle(Presenter.CreateFighter(), Presenter.CreateCPUFighter(), true);
+            listBoxLog.Text = "";
         }
-        public void SetBindings()
-        {
-            bindingBattle.DataSource = presenter;
 
-            labelLeftFighter.DataBindings.Add("Text", bindingBattle, "Battle.Fighter1.Name");
-            labelHPLeftFighter.DataBindings.Add("Text", bindingBattle, "Battle.Fighter1.HPFormatted");
-            progressBarLeftFighter.DataBindings.Add("Maximum", bindingBattle, "Battle.Fighter1.MaxHP");
-            progressBarLeftFighter.DataBindings.Add("Value", bindingBattle, "Battle.Fighter1.HP");
+        public void SetBindings(BindingSource binding)
+        {
+            labelLeftFighter.DataBindings.Add("Text", binding, "Battle.Fighter1.Name");
+            labelHPLeftFighter.DataBindings.Add("Text", binding, "Battle.Fighter1.HPFormatted");
+            progressBarLeftFighter.DataBindings.Add("Maximum", binding, "Battle.Fighter1.MaxHP");
+            progressBarLeftFighter.DataBindings.Add("Value", binding, "Battle.Fighter1.HP");
             TrySetImage(pictureBoxLeftFighter, presenter.Battle.Fighter1.ImagePath);
 
-            labelRightFighter.DataBindings.Add("Text", bindingBattle, "Battle.Fighter2.Name");
-            labelHPRightFighter.DataBindings.Add("Text", bindingBattle, "Battle.Fighter2.HPFormatted");
-            progressBarRightFighter.DataBindings.Add("Maximum", bindingBattle, "Battle.Fighter2.MaxHP");
-            progressBarRightFighter.DataBindings.Add("Value", bindingBattle, "Battle.Fighter2.HP");
+            labelRightFighter.DataBindings.Add("Text", binding, "Battle.Fighter2.Name");
+            labelHPRightFighter.DataBindings.Add("Text", binding, "Battle.Fighter2.HPFormatted");
+            progressBarRightFighter.DataBindings.Add("Maximum", binding, "Battle.Fighter2.MaxHP");
+            progressBarRightFighter.DataBindings.Add("Value", binding, "Battle.Fighter2.HP");
             TrySetImage(pictureBoxRightFighter, presenter.Battle.Fighter2.ImagePath);
             pictureBoxRightFighter.Image.RotateFlip(RotateFlipType.RotateNoneFlipX);
 
-            labelRoundCount.DataBindings.Add("Text", bindingBattle, "Battle.Round");
-            labelAction.DataBindings.Add("Text", bindingBattle, "WhatToDo");
+            labelRoundCount.DataBindings.Add("Text", binding, "Battle.Round");
+            labelAction.DataBindings.Add("Text", binding, "WhatToDo");
             
-            bindingBattle.CurrentItemChanged += BindingBattle_CurrentChanged;
+            binding.CurrentItemChanged += BindingBattle_CurrentChanged;
+        }
+        public void EndGame(string winnerName)
+        {
+            MessageBox.Show("Победил " + winnerName + "!");
+            Application.Exit();
+        }
+        private void SavePresenter()
+        {
+            saveFileDialogSaveBattle.ShowDialog();
+            if (saveFileDialogSaveBattle.FileName != "")
+            {
+                using (FileStream fs = (System.IO.FileStream)saveFileDialogSaveBattle.OpenFile())
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(fs, presenter);
+                }
+            }
+        }
+        private void LoadPresenter()
+        {
+            if (openFileDialogOpenBattle.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                using (FileStream fs = (System.IO.FileStream)openFileDialogOpenBattle.OpenFile())
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    try
+                    {
+                        IPresenter loadedPresenter = (IPresenter)bf.Deserialize(fs);
+                        presenter.LoadBattle(loadedPresenter);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Невозможно загрузить бой.");
+                    }
+                }
+            }
         }
         private void TrySetImage(PictureBox pb, string imagePath)
         {
@@ -56,12 +100,12 @@ namespace ISD.FightClub
 
         private void BindingBattle_CurrentChanged(object sender, EventArgs e)
         {
-            List<string> logList = ((Presenter)((BindingSource)sender).Current).Log;
+            List<string> logList = ((IPresenter)((BindingSource)sender).Current).Log.ToList();
 
-            log.Items.Clear();
+            listBoxLog.Items.Clear();
             foreach (string logItem in logList)
             {
-                log.Items.Add(logItem);
+                listBoxLog.Items.Add(logItem);
             }
         }
         private void buttonHead_Click(object sender, EventArgs e)
@@ -78,38 +122,17 @@ namespace ISD.FightClub
         }
         private void новаяИграToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            presenter.InitializeNewBattle(Presenter.CreateFighter(), Presenter.CreateCPUFighter(), false);
+            Creator fighterCreator = new MortalCombatCreator();
+            presenter.ResetBattle(fighterCreator.CreateFighter(), fighterCreator.CreateCPUFighter());
         }
         private void сохранитьБойВФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveFileDialogSaveBattle.ShowDialog();
-            if (saveFileDialogSaveBattle.FileName != "")
-            {
-                using (FileStream fs = (System.IO.FileStream)saveFileDialogSaveBattle.OpenFile())
-                {
-                    BinaryFormatter bf = new BinaryFormatter();
-                    bf.Serialize(fs, presenter);
-                }
-            }
+            SavePresenter();
         }
         private void загрузитьБойИзФайлаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (openFileDialogOpenBattle.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                using (FileStream fs = (System.IO.FileStream)openFileDialogOpenBattle.OpenFile())
-                {
-                    BinaryFormatter bf = new BinaryFormatter();
-                    try
-                    {
-                        Presenter loadedPresenter = (Presenter)bf.Deserialize(fs);
-                        presenter.InitializeLoadedBattle(loadedPresenter);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Невозможно загрузить бой.");
-                    }
-                }
-            }
+            LoadPresenter();
         }
+
     }
 }

@@ -39,7 +39,8 @@
             this.progressBarRightFighter = new System.Windows.Forms.ProgressBar();
             this.pictureBoxRightFighter = new System.Windows.Forms.PictureBox();
             this.panelControl = new System.Windows.Forms.Panel();
-            this.log = new System.Windows.Forms.ListBox();
+            this.labelRoundCount = new System.Windows.Forms.Label();
+            this.listBoxLog = new System.Windows.Forms.ListBox();
             this.labelAction = new System.Windows.Forms.Label();
             this.labelRound = new System.Windows.Forms.Label();
             this.buttonLegs = new System.Windows.Forms.Button();
@@ -51,7 +52,6 @@
             this.сохранитьБойВФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialogSaveBattle = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialogOpenBattle = new System.Windows.Forms.OpenFileDialog();
-            this.labelRoundCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLeftFighter)).BeginInit();
             this.panelLeftFighter.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -179,7 +179,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelControl.Controls.Add(this.labelRoundCount);
-            this.panelControl.Controls.Add(this.log);
+            this.panelControl.Controls.Add(this.listBoxLog);
             this.panelControl.Controls.Add(this.labelAction);
             this.panelControl.Controls.Add(this.labelRound);
             this.panelControl.Controls.Add(this.buttonLegs);
@@ -190,14 +190,25 @@
             this.panelControl.Size = new System.Drawing.Size(330, 552);
             this.panelControl.TabIndex = 5;
             // 
-            // log
+            // labelRoundCount
             // 
-            this.log.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.log.FormattingEnabled = true;
-            this.log.Location = new System.Drawing.Point(7, 343);
-            this.log.Name = "log";
-            this.log.Size = new System.Drawing.Size(320, 212);
-            this.log.TabIndex = 6;
+            this.labelRoundCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelRoundCount.AutoSize = true;
+            this.labelRoundCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelRoundCount.Location = new System.Drawing.Point(55, 7);
+            this.labelRoundCount.Name = "labelRoundCount";
+            this.labelRoundCount.Size = new System.Drawing.Size(18, 20);
+            this.labelRoundCount.TabIndex = 7;
+            this.labelRoundCount.Text = "1";
+            // 
+            // listBoxLog
+            // 
+            this.listBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBoxLog.FormattingEnabled = true;
+            this.listBoxLog.Location = new System.Drawing.Point(7, 343);
+            this.listBoxLog.Name = "listBoxLog";
+            this.listBoxLog.Size = new System.Drawing.Size(320, 212);
+            this.listBoxLog.TabIndex = 6;
             // 
             // labelAction
             // 
@@ -299,17 +310,6 @@
             // 
             this.openFileDialogOpenBattle.Filter = "Битва|*btl*";
             // 
-            // labelRoundCount
-            // 
-            this.labelRoundCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelRoundCount.AutoSize = true;
-            this.labelRoundCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelRoundCount.Location = new System.Drawing.Point(55, 7);
-            this.labelRoundCount.Name = "labelRoundCount";
-            this.labelRoundCount.Size = new System.Drawing.Size(18, 20);
-            this.labelRoundCount.TabIndex = 7;
-            this.labelRoundCount.Text = "1";
-            // 
             // FormView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -353,7 +353,7 @@
         private System.Windows.Forms.Button buttonBody;
         private System.Windows.Forms.Label labelAction;
         private System.Windows.Forms.Label labelRound;
-        private System.Windows.Forms.ListBox log;
+        private System.Windows.Forms.ListBox listBoxLog;
         private System.Windows.Forms.Label labelHPLeftFighter;
         private System.Windows.Forms.Label labelHPRightFighter;
         private System.Windows.Forms.MenuStrip menuStrip;
