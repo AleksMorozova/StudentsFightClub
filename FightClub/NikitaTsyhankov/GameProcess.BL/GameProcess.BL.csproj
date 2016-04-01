@@ -43,6 +43,7 @@
     <Compile Include="ConstantFields.cs" />
     <Compile Include="Fighters\CPUPlayer.cs" />
     <Compile Include="Fighters\EventArgsFighter.cs" />
+    <Compile Include="Fighters\ICPUFighter.cs" />
     <Compile Include="Fighters\IFighter.cs" />
     <Compile Include="Fighters\Player.cs" />
     <Compile Include="IFighting.cs" />
