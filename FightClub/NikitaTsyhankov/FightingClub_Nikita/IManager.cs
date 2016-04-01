@@ -1,11 +1,11 @@
 ﻿using GameProcess.BL;
-using System;
+using System.Collections.Generic;
 
 namespace FightingClub_Nikita
 {
     public interface IManager
     {
-        void SaveLog(String _log);
+        void SaveLog(List<string> _log);
         void SaveGame(IFighting _process);
         IFighting LoadGame();
     }

@@ -1,12 +1,20 @@
 ﻿using GameProcess.BL.Fighters;
+using System;
+using System.Collections.Generic;
 
 namespace GameProcess.BL
 {
+    [Serializable]
     public class Logic : IFighting
     {
-        public Player Player1 { get; private set; }
-        public CPUPlayer Player2 { get; private set; }
+        public IFighter Player1 { get; private set; }
+        public ICPUFighter Player2 { get; private set; }
         public int Round { get; private set; }
+        private List<string> _log = new List<string>();
+        public List<string> Log
+        {
+            get { return _log; }
+        }
 
         public Logic()
         {
@@ -29,6 +37,10 @@ namespace GameProcess.BL
                 Player1.GetHit(Player2.MakeHit(), ConstantFields.basicDamage);
             }
             Round++;
+        }
+        public void AddToLog(string item)
+        {
+            _log.Add(item);
         }
     }
 }

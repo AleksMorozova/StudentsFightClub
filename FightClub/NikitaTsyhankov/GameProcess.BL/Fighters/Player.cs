@@ -2,13 +2,17 @@
 
 namespace GameProcess.BL.Fighters
 {
+    [Serializable]
     public class Player: IFighter
     {
         #region Variables
-        private EventArgsFighter args;
+        [field: NonSerialized]
         public event EventHandler<EventArgsFighter> Block;
+        [field: NonSerialized]
         public event EventHandler<EventArgsFighter> Wound;
+        [field: NonSerialized]
         public event EventHandler<EventArgsFighter> Death;
+
 
         private BodyParts _blocked;
         private string _name;
@@ -19,7 +23,6 @@ namespace GameProcess.BL.Fighters
             set
             {
                 _name = value;
-                args.Name = _name;
             }
         }
         public int HealthPoints
@@ -28,11 +31,11 @@ namespace GameProcess.BL.Fighters
             private set
             {
                 _hp = value;
-                args.HP = value;
                 if (_hp < 0)
                 {
                     _hp = 0;
-                    if (Death != null) Death(this, args);
+                    if (Death != null) Death(this,
+                    new EventArgsFighter(HealthPoints, Name));
                 }
             }
         }
@@ -40,23 +43,22 @@ namespace GameProcess.BL.Fighters
 
         public Player(String _name, int _hp)
         {
-            args = new EventArgsFighter();
             Name = _name;
             HealthPoints = _hp;
-            args.HP = HealthPoints;
         }
 
         public void GetHit(BodyParts _hited, int _dmg)
         {
             if (_hited == _blocked)
             {
-                if (Block != null) Block(this, args);
+                if (Block != null) Block(this, 
+                    new EventArgsFighter(HealthPoints, Name));
             }
             else
             {
                 HealthPoints -= _dmg;
-                args.HP = HealthPoints;
-                if (Wound != null && 0 != HealthPoints) Wound(this, args);
+                if (Wound != null && 0 != HealthPoints) Wound(this,
+                    new EventArgsFighter(HealthPoints, Name));
             }
         }
 

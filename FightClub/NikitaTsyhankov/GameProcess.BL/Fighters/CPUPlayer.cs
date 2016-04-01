@@ -2,7 +2,8 @@
 
 namespace GameProcess.BL.Fighters
 {
-    public class CPUPlayer : Player, IFighter
+    [Serializable]
+    public class CPUPlayer : Player, ICPUFighter
     {
         private static Random rnd;
 

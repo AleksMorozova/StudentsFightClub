@@ -1,14 +1,15 @@
 ﻿using GameProcess.BL.Fighters;
+using System.Collections.Generic;
 
 namespace GameProcess.BL
 {
     public interface IFighting
     {
-        Player Player1
+        IFighter Player1
         {
             get;
         }
-        CPUPlayer Player2
+        ICPUFighter Player2
         {
             get;
         }
@@ -16,6 +17,11 @@ namespace GameProcess.BL
         {
             get;
         }
+        List<string> Log
+        {
+            get;
+        }
         void MakeStep(BodyParts _part);
+        void AddToLog(string item);
     }
 }

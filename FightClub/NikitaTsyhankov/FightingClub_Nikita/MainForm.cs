@@ -14,12 +14,10 @@ namespace FightingClub_Nikita
         public event EventHandler ButSaveGameClick;
 
         private StartForm start = new StartForm();
-        private EventArgsBodyParts argsPart;
 
         public MainForm()
         {
             InitializeComponent();
-            argsPart = new EventArgsBodyParts();
             start.ShowDialog();
             NamePlayer1 = start.StartName;
         }
@@ -31,28 +29,42 @@ namespace FightingClub_Nikita
             butHead.Enabled = false;
             butBody.Enabled = false;
             butLeg.Enabled = false;
-            Log = "Fight over in " + Rounds + " rounds";
-            Log = "*Log saved*. Log saved to the root directory.";
         }
+        public void UnblockGame()
+        {
+            lblFinish.Visible = false;
+            butHead.Enabled = true;
+            butBody.Enabled = true;
+            butLeg.Enabled = true;
+        }
+        public void ClearLog()
+        {
+            listBoxLog.Items.Clear();
+        }
+
         #region Events
         private void butHead_Click(object sender, EventArgs e)
         {
-            argsPart._part = BodyParts._head;
-            if (ButHeadClick != null) ButHeadClick(this, argsPart);
+            if (ButHeadClick != null) ButHeadClick(this, 
+                new EventArgsBodyParts(BodyParts._head));
         }
 
         private void butBody_Click(object sender, EventArgs e)
         {
-            argsPart._part = BodyParts._body;
-            if (ButBodyClick != null) ButBodyClick(this, argsPart);
+            if (ButBodyClick != null) ButBodyClick(this,
+                new EventArgsBodyParts(BodyParts._body));
         }
 
         private void butLeg_Click(object sender, EventArgs e)
         {
-            argsPart._part = BodyParts._leg;
-            if (ButLegClick != null) ButLegClick(this, argsPart);
+            if (ButLegClick != null) ButLegClick(this,
+                new EventArgsBodyParts(BodyParts._leg));
         }
-        private void openLogFileToolStripMenuItem_Click(object sender, EventArgs e)
+        private void saveGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ButSaveGameClick != null) ButSaveGameClick(this, EventArgs.Empty);
+        }
+        private void loadGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ButLoadGameClick != null) ButLoadGameClick(this, EventArgs.Empty);
         }
@@ -111,10 +123,9 @@ namespace FightingClub_Nikita
         }
         public string Log
         {
-            get { return textBoxLog.Text; }
             set
             {
-                textBoxLog.Text += value + "\n";
+                listBoxLog.Items.Add(value);
             }
         }
         #endregion

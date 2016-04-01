@@ -32,7 +32,9 @@
             this.menuMainStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openLogFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblTitle = new System.Windows.Forms.Label();
             this.butHead = new System.Windows.Forms.Button();
@@ -50,7 +52,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRounds = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblFinish = new System.Windows.Forms.Label();
-            this.textBoxLog = new System.Windows.Forms.RichTextBox();
+            this.listBoxLog = new System.Windows.Forms.ListBox();
             this.menuMainStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayerTwo)).BeginInit();
@@ -72,7 +74,9 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newGameToolStripMenuItem,
-            this.openLogFileToolStripMenuItem,
+            this.saveGameToolStripMenuItem,
+            this.loadGameToolStripMenuItem,
+            this.stToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 19);
@@ -81,21 +85,33 @@
             // newGameToolStripMenuItem
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newGameToolStripMenuItem.Text = "New game";
             this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGameToolStripMenuItem_Click);
             // 
-            // openLogFileToolStripMenuItem
+            // saveGameToolStripMenuItem
             // 
-            this.openLogFileToolStripMenuItem.Name = "openLogFileToolStripMenuItem";
-            this.openLogFileToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.openLogFileToolStripMenuItem.Text = "Open log file";
-            this.openLogFileToolStripMenuItem.Click += new System.EventHandler(this.openLogFileToolStripMenuItem_Click);
+            this.saveGameToolStripMenuItem.Name = "saveGameToolStripMenuItem";
+            this.saveGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveGameToolStripMenuItem.Text = "Save game";
+            this.saveGameToolStripMenuItem.Click += new System.EventHandler(this.saveGameToolStripMenuItem_Click);
+            // 
+            // loadGameToolStripMenuItem
+            // 
+            this.loadGameToolStripMenuItem.Name = "loadGameToolStripMenuItem";
+            this.loadGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadGameToolStripMenuItem.Text = "Load game";
+            this.loadGameToolStripMenuItem.Click += new System.EventHandler(this.loadGameToolStripMenuItem_Click);
+            // 
+            // stToolStripMenuItem
+            // 
+            this.stToolStripMenuItem.Name = "stToolStripMenuItem";
+            this.stToolStripMenuItem.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -265,23 +281,23 @@
             this.lblFinish.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblFinish.Visible = false;
             // 
-            // textBoxLog
+            // listBoxLog
             // 
-            this.textBoxLog.Font = new System.Drawing.Font("Monotype Corsiva", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxLog.Location = new System.Drawing.Point(12, 350);
-            this.textBoxLog.Name = "textBoxLog";
-            this.textBoxLog.ReadOnly = true;
-            this.textBoxLog.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-            this.textBoxLog.Size = new System.Drawing.Size(761, 136);
-            this.textBoxLog.TabIndex = 22;
-            this.textBoxLog.Text = "";
+            this.listBoxLog.Font = new System.Drawing.Font("Monotype Corsiva", 14.25F, System.Drawing.FontStyle.Italic);
+            this.listBoxLog.FormattingEnabled = true;
+            this.listBoxLog.ItemHeight = 22;
+            this.listBoxLog.Location = new System.Drawing.Point(12, 352);
+            this.listBoxLog.Name = "listBoxLog";
+            this.listBoxLog.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.listBoxLog.Size = new System.Drawing.Size(761, 136);
+            this.listBoxLog.TabIndex = 22;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(785, 511);
-            this.Controls.Add(this.textBoxLog);
+            this.Controls.Add(this.listBoxLog);
             this.Controls.Add(this.lblFinish);
             this.Controls.Add(this.statusMainStrip);
             this.Controls.Add(this.pictureBoxPlayerTwo);
@@ -319,7 +335,7 @@
         private System.Windows.Forms.MenuStrip menuMainStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newGameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openLogFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button butHead;
@@ -337,7 +353,9 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRounds;
         private System.Windows.Forms.Label lblFinish;
-        private System.Windows.Forms.RichTextBox textBoxLog;
+        private System.Windows.Forms.ToolStripMenuItem saveGameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator stToolStripMenuItem;
+        private System.Windows.Forms.ListBox listBoxLog;
     }
 }
 
