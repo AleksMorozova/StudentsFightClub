@@ -32,16 +32,7 @@ namespace CombatClub
                 labelPlayerHP, labelCompPlayerHP,
                 buttonHead, buttonBody, buttonLegs,
                 progressBarPlayer, progressBarComputer);
-
-//            game.form1 = this.Form1;
-            game.player.Block += new Player.Del(game.EventBlockLog);
-            game.player.Wound += new Player.Del(game.EventWoundLog);
-            game.player.Death += new Player.Del(game.EventDeathLog);
-
-            game.computerPlayer.Block += new ComputerPlayer.Del(game.EventBlockLog);
-            game.computerPlayer.Wound += new ComputerPlayer.Del(game.EventWoundLog);
-            game.computerPlayer.Death += new ComputerPlayer.Del(game.EventDeathLog);
-            
+           
         }
 
         private void Form1_Load(object sender, EventArgs e)

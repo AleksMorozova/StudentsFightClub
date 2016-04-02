@@ -8,73 +8,82 @@ namespace CombatClub
 {     
     enum BodyParts {head, body, legs};
 
-    public class EventsArgs : EventArgs
-    {
-        public string name { get; set; }
-        public int Hp { get; set; }
-        public EventsArgs(string name, int hp)
-        {
-            this.name = name;
-            this.Hp = hp;
-        }
-    }
-
     class Player
     {    
-        public delegate void Del(object sender, EventsArgs args);        
-        const int startHp = 10;
+        public delegate void Del(object sender, PlayerEventArgs args);        
+        const int startHp = 3;
 
         public string Name { get; set; }
         public BodyParts Blocked { get; set; }
         public int Hp {get; set;}      
         int Damage { get; set; }
         public bool Attacker { get; set; }
-        public BodyParts Attacked { get; set; }
+        public BodyParts Attacked { get; set; }         
 
-        public Player() { }
-
-        public Player(string name)
+        public Player(string name, int hp)
         {
             this.Name = name;
-            Hp = startHp;            
+            this.Hp = hp;
             this.Attacker = true;
         }
 
-        public void BlockEvent(EventsArgs e)
+        virtual public BodyParts ReturnAttackPartBody()
         {
-            if (Block != null)
-                Block(this,e);
+            return Attacked;
         }
 
-        public void WoundEvent(EventsArgs e)
+        virtual public void GetHit(BodyParts bodyPartAttack)
         {
-            if (Wound != null)
-                Wound(this, e);
+            Attacked = bodyPartAttack;     
+            if (bodyPartAttack == Blocked)
+            {
+                OnBlock();
+            }
+            else
+                if (bodyPartAttack != Blocked)
+                {
+                    Hp--;
+                    if (Hp > 0)
+                    {                        
+                        OnWound();
+                    }
+                    else
+                        OnDeath();
+                }
         }
 
-        public void DeathEvent(EventsArgs e)
-        {
-            if (Death != null)
-               Death(this, e);
-        }
-
-        public bool CompareParts(Player player, ComputerPlayer compPlayer)
-        {
-            return player.Blocked == compPlayer.Blocked;
-        }
-
-        public void GetHit(BodyParts bodyPartAttack)
-        {
-            Attacked = bodyPartAttack;            
-        }
-
-        public void SetBlock(BodyParts bodyPartBlock)
+        virtual public void SetBlock(BodyParts bodyPartBlock)
         {
             Blocked = bodyPartBlock;            
         }
+              
+        public event EventHandler<PlayerEventArgs> Block;
+        public event EventHandler<PlayerEventArgs> Wound;
+        public event EventHandler<PlayerEventArgs> Death;
+
+        protected void OnBlock()
+        {           
+            if (Block != null)
+            {
+                Block(this, new PlayerEventArgs(this.Name, this.Hp));                
+            }
+        }
+
+        protected void OnWound()
+        {          
+            if (Wound != null)
+            {
+                Wound(this, new PlayerEventArgs(this.Name, this.Hp));               
+            }
+        }
+
+        protected void OnDeath()
+        {
+            if (Death != null)
+            {
+                Death(this, new PlayerEventArgs(this.Name, this.Hp));
+            }
+        }
         
-        public event Del Block;
-        public event Del Wound;
-        public event Del Death;
     }
 }
