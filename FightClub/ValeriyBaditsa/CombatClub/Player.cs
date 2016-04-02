@@ -84,20 +84,6 @@ namespace CombatClub
                 Death(this, new PlayerEventArgs(this.Name, this.Hp));
             }
         }
-
-        //public void BlockEvent()
-        //{
-        //    OnBlock(new PlayerEventArgs(this.Name, this.Hp));
-        //}
-
-        //public void WoundEvent()
-        //{
-        //    OnWound(new PlayerEventArgs(this.Name, this.Hp));
-        //}
-
-        //public void DeathEvent()
-        //{
-        //    OnDeath(new PlayerEventArgs(this.Name, this.Hp));
-        //}
+        
     }
 }
