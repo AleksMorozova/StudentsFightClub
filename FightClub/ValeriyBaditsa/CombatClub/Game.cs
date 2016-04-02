@@ -10,7 +10,7 @@ namespace CombatClub
     partial class Game
     {        
         public Player player;
-        public Player computerPlayer;// = new ComputerPlayer("",0);
+        public Player computerPlayer;
         
 
         public void PrintToLabel(object sender)

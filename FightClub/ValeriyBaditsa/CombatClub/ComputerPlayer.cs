@@ -14,8 +14,7 @@ namespace CombatClub
         public ComputerPlayer(string name, int hp) 
              : base (name, hp)
         {            
-            //numberBodyPart = rndm.Next(3);
-            //Blocked = (BodyParts)numberBodyPart;            
+                        
         }
 
         
