@@ -28,51 +28,8 @@ namespace CombatClub
                     labelCompHp.Text = Convert.ToString(computerPlayer.Hp);
                     barComp.Value = computerPlayer.Hp;
                 }
-        }
-
-        //public void ChangeRoles(Player player)
-        //{
-        //    if (player.Hp > 0)
-        //    {
-        //        GameProc();
-        //    }
-        //    else
-        //    {
-        //        player.Block();
-        //        FinishGame();               
-        //    }
-        //}
-
-        public void FinishGame()
-        {
-            player = null;
-            computerPlayer = null;
-            b1.Enabled = false;
-            b2.Enabled = false;
-            b3.Enabled = false;
-        }
-
-        public void GameProc()
-        {
-            if (player.Attacker == false)
-            {
-                player.Attacker = true;
-                computerPlayer.Attacker = false;
-                b1.Text = "Head attack";
-                b2.Text = "Body attack";
-                b3.Text = "Legs attack";
-            }
-            else
-            {
-                player.Attacker = false;
-                computerPlayer.Attacker = true;
-                b1.Text = "Block head";
-                b2.Text = "Block body";
-                b3.Text = "Block legs";
-            }
-
-
-        }
+        }                
+        
 
         public void LogicGame(BodyParts bodyPart)
         {
@@ -84,6 +41,9 @@ namespace CombatClub
                 {
                     player.Attacker = false;
                     computerPlayer.Attacker = true;
+                    b1.Text = "Block head";
+                    b2.Text = "Block body";
+                    b3.Text = "Block legs";
                 }
             }
             else
@@ -96,61 +56,14 @@ namespace CombatClub
                     {
                         player.Attacker = true;
                         computerPlayer.Attacker = false;
+                        b1.Text = "Head attack";
+                        b2.Text = "Body attack";
+                        b3.Text = "Legs attack";
+
                     }
                 }
             }
             
-        }
-    //    public void LogicGame(BodyParts bodyPart)
-    //    {
-    //        if (player.Attacker)
-    //        {
-    //            computerPlayer.SetBlock();
-    //            player.GetHit(bodyPart);
-    //            if (computerPlayer.Blocked == player.Attacked)
-    //            {                   
-    //                computerPlayer.BlockEvent();                                     
-    //            }
-    //            else
-    //            {
-    //                if (computerPlayer.Blocked != player.Attacked)
-    //                {
-    //                    if (computerPlayer.Hp > 0)
-    //                    {
-    //                        computerPlayer.Hp--;
-    //                        computerPlayer.WoundEvent();
-    //                    }                        
-    //                }
-    //            }
-    //            ChangeRoles(computerPlayer);
-    //        }       
-    //        else          
-    //        {
-    //            if (computerPlayer.Attacker)
-    //            {
-    //                player.SetBlock(bodyPart);
-    //                computerPlayer.GetHit();
-    //                if (player.Blocked == computerPlayer.Attacked)
-    //                {
-    //                    //player.BlockEvent(new PlayerEventArgs(player.Name, player.Hp));
-    //                    player.BlockEvent();
-    //                    //new PlayerEventArgs(player.Name, player.Hp)
-    //                }
-    //                else
-    //                    if (player.Blocked != computerPlayer.Attacked)
-    //                    {
-    //                        if (player.Hp > 0)
-    //                        {
-    //                            player.Hp--;
-    //                            player.WoundEvent();
-    //                        }
-    //                        else
-    //                            player.DeathEvent();
-    //                    }
-    //                ChangeRoles(player);
-                       
-    //        }
-    //    }            
-    //}
+        }   
 }
 }

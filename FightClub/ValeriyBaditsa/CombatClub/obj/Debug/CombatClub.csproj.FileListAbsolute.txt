@@ -16,3 +16,12 @@ C:\Users\HP\Documents\GitHub\CombatClub2\CombatClub\obj\Debug\CombatClub.csprojR
 C:\Users\HP\Documents\GitHub\CombatClub2\CombatClub\obj\Debug\CombatClub.Form1.resources
 C:\Users\HP\Documents\GitHub\CombatClub2\CombatClub\obj\Debug\CombatClub.Properties.Resources.resources
 C:\Users\HP\Documents\GitHub\CombatClub2\CombatClub\obj\Debug\CombatClub.csproj.GenerateResource.Cache
+C:\Users\HP\Documents\GitHub\StudentsFightClub\FightClub\ValeriyBaditsa\CombatClub\bin\Debug\CombatClub.exe.config
+C:\Users\HP\Documents\GitHub\StudentsFightClub\FightClub\ValeriyBaditsa\CombatClub\obj\Debug\CombatClub.exe
+C:\Users\HP\Documents\GitHub\StudentsFightClub\FightClub\ValeriyBaditsa\CombatClub\obj\Debug\CombatClub.pdb
+C:\Users\HP\Documents\GitHub\StudentsFightClub\FightClub\ValeriyBaditsa\CombatClub\bin\Debug\CombatClub.exe
+C:\Users\HP\Documents\GitHub\StudentsFightClub\FightClub\ValeriyBaditsa\CombatClub\bin\Debug\CombatClub.pdb
+C:\Users\HP\Documents\GitHub\StudentsFightClub\FightClub\ValeriyBaditsa\CombatClub\obj\Debug\CombatClub.csprojResolveAssemblyReference.cache
+C:\Users\HP\Documents\GitHub\StudentsFightClub\FightClub\ValeriyBaditsa\CombatClub\obj\Debug\CombatClub.Form1.resources
+C:\Users\HP\Documents\GitHub\StudentsFightClub\FightClub\ValeriyBaditsa\CombatClub\obj\Debug\CombatClub.Properties.Resources.resources
+C:\Users\HP\Documents\GitHub\StudentsFightClub\FightClub\ValeriyBaditsa\CombatClub\obj\Debug\CombatClub.csproj.GenerateResource.Cache

@@ -12,6 +12,7 @@ namespace CombatClub
         {
             lstBox.Items.Add(args.name + ": удар заблокирован. ");
             PrintToLabel(sender);
+           
         }
 
         protected void OnWoundMessage(object sender, PlayerEventArgs args)
