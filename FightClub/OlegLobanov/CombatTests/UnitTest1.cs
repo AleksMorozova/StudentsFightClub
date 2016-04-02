@@ -43,18 +43,24 @@ namespace CombatTests
         [TestMethod]
         public void DMGTest()
         {
+            
             Combats.Player first = new Combats.Player("f1", 100, 1000);
             Combats.CompPlayer second = new Combats.CompPlayer("f2", 100, 1000);
 
+            
+
             Controller contr = new Controller(first, second);
+
+           
 
             contr.human.GetHit(contr.human.Blocked, 50);
             Assert.AreEqual(contr.human.HP, 100);
+            
 
             contr.human.GetHit(BodyPart.Head, 50);
-            Assert.AreEqual(contr.human.HP, 50);
+            Assert.AreEqual(contr.human.HP, 100);
 
-            contr.human.GetHit(BodyPart.Head, 100);
+            contr.human.GetHit(BodyPart.Body, 1000);
             Assert.AreEqual(contr.human.HP, 0);
         }
 
@@ -75,7 +81,7 @@ namespace CombatTests
         [TestMethod()]
         public void HitTest()
         {
-            Player first = new Player("f1", 150, 16);
+            Player first = new Player("f1", 15, 16);
             first.SetBlock(BodyPart.Head);
 
             first.GetHit(BodyPart.Head, 10);
@@ -109,15 +115,15 @@ namespace CombatTests
             Player first = new Player("f1", 150, 16);
 
             bool[] tests = new bool[3];
-            first.Block += (Player sender) =>
+            first.Block += (Player sender, PlayerEventArgs result) =>
             {
                 tests[0] = true;
             };
-            first.Wound += (Player sender) =>
+            first.Wound += (Player sender, PlayerEventArgs result) =>
             {
                 tests[1] = true;
             };
-            first.Death +=(Player sender) =>
+            first.Death += (Player sender, PlayerEventArgs result) =>
             {
                 tests[2] = true;
             };
