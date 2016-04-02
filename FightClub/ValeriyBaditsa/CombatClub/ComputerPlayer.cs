@@ -7,30 +7,46 @@ using System.Threading.Tasks;
 namespace CombatClub
 {
     class  ComputerPlayer : Player
-    {
-        //new public int Hp;
+    {        
         private Random rndm = new Random();
         private int numberBodyPart;
         
         public ComputerPlayer(string name, int hp) 
              : base (name, hp)
         {            
-            numberBodyPart = rndm.Next(3);
-            Blocked = (BodyParts)numberBodyPart;            
+            //numberBodyPart = rndm.Next(3);
+            //Blocked = (BodyParts)numberBodyPart;            
         }
 
         
-        public void GetHit()
+        override public void GetHit(BodyParts bodyPart)             
+        {
+            bodyPart = RandomBodyPart();
+            base.GetHit(bodyPart);                        
+        }
+        public BodyParts testc()
+        {
+            return BodyParts.body;
+        }
+
+        public override BodyParts ReturnAttackPartBody()
+        {
+            this.Attacked = RandomBodyPart();
+            return this.Attacked;
+        }
+
+        public BodyParts RandomBodyPart()
         {
             numberBodyPart = rndm.Next(3);
-            Attacked = (BodyParts)numberBodyPart;           
+            Attacked = (BodyParts)numberBodyPart;
+            return Attacked;
         }
 
         // рандомный выбор защищаемой части тела
-        public void SetBlock()
+        public override void SetBlock(BodyParts bodyPart)
         {
-            numberBodyPart = rndm.Next(3);
-            Blocked = (BodyParts)numberBodyPart;
+            bodyPart = RandomBodyPart();
+            base.SetBlock(bodyPart);            
         }
     }
 }

@@ -10,7 +10,7 @@ namespace CombatClub
     partial class Game
     {        
         public Player player;
-        public ComputerPlayer computerPlayer;
+        public Player computerPlayer;// = new ComputerPlayer("",0);
         
 
         public void PrintToLabel(object sender)
@@ -30,18 +30,18 @@ namespace CombatClub
                 }
         }
 
-        public void ChangeRoles(Player player)
-        {
-            if (player.Hp > 0)
-            {
-                GameProc();
-            }
-            else
-            {
-                player.BlockEvent();
-                FinishGame();               
-            }
-        }
+        //public void ChangeRoles(Player player)
+        //{
+        //    if (player.Hp > 0)
+        //    {
+        //        GameProc();
+        //    }
+        //    else
+        //    {
+        //        player.Block();
+        //        FinishGame();               
+        //    }
+        //}
 
         public void FinishGame()
         {
@@ -78,52 +78,79 @@ namespace CombatClub
         {
             if (player.Attacker)
             {
-                computerPlayer.SetBlock();
-                player.GetHit(bodyPart);
-                if (computerPlayer.Blocked == player.Attacked)
-                {                   
-                    computerPlayer.BlockEvent();                                     
-                }
-                else
+                computerPlayer.SetBlock(bodyPart);
+                computerPlayer.GetHit(bodyPart);
+                if (player != null && computerPlayer != null)
                 {
-                    if (computerPlayer.Blocked != player.Attacked)
-                    {
-                        if (computerPlayer.Hp > 0)
-                        {
-                            computerPlayer.Hp--;
-                            computerPlayer.WoundEvent();
-                        }                        
-                    }
+                    player.Attacker = false;
+                    computerPlayer.Attacker = true;
                 }
-                ChangeRoles(computerPlayer);
-            }       
-            else          
+            }
+            else
             {
                 if (computerPlayer.Attacker)
                 {
-                    player.SetBlock(bodyPart);
-                    computerPlayer.GetHit();
-                    if (player.Blocked == computerPlayer.Attacked)
+                    player.SetBlock(bodyPart);                    
+                    player.GetHit(computerPlayer.ReturnAttackPartBody());
+                    if (player != null && computerPlayer!=null)                        
                     {
-                        //player.BlockEvent(new PlayerEventArgs(player.Name, player.Hp));
-                        player.BlockEvent();
-                        //new PlayerEventArgs(player.Name, player.Hp)
+                        player.Attacker = true;
+                        computerPlayer.Attacker = false;
                     }
-                    else
-                        if (player.Blocked != computerPlayer.Attacked)
-                        {
-                            if (player.Hp > 0)
-                            {
-                                player.Hp--;
-                                player.WoundEvent();
-                            }
-                            else
-                                player.DeathEvent();
-                        }
-                    ChangeRoles(player);
-                       
+                }
             }
-        }            
-    }
+            
+        }
+    //    public void LogicGame(BodyParts bodyPart)
+    //    {
+    //        if (player.Attacker)
+    //        {
+    //            computerPlayer.SetBlock();
+    //            player.GetHit(bodyPart);
+    //            if (computerPlayer.Blocked == player.Attacked)
+    //            {                   
+    //                computerPlayer.BlockEvent();                                     
+    //            }
+    //            else
+    //            {
+    //                if (computerPlayer.Blocked != player.Attacked)
+    //                {
+    //                    if (computerPlayer.Hp > 0)
+    //                    {
+    //                        computerPlayer.Hp--;
+    //                        computerPlayer.WoundEvent();
+    //                    }                        
+    //                }
+    //            }
+    //            ChangeRoles(computerPlayer);
+    //        }       
+    //        else          
+    //        {
+    //            if (computerPlayer.Attacker)
+    //            {
+    //                player.SetBlock(bodyPart);
+    //                computerPlayer.GetHit();
+    //                if (player.Blocked == computerPlayer.Attacked)
+    //                {
+    //                    //player.BlockEvent(new PlayerEventArgs(player.Name, player.Hp));
+    //                    player.BlockEvent();
+    //                    //new PlayerEventArgs(player.Name, player.Hp)
+    //                }
+    //                else
+    //                    if (player.Blocked != computerPlayer.Attacked)
+    //                    {
+    //                        if (player.Hp > 0)
+    //                        {
+    //                            player.Hp--;
+    //                            player.WoundEvent();
+    //                        }
+    //                        else
+    //                            player.DeathEvent();
+    //                    }
+    //                ChangeRoles(player);
+                       
+    //        }
+    //    }            
+    //}
 }
 }

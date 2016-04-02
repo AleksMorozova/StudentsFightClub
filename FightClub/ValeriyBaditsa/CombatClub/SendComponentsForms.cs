@@ -27,7 +27,7 @@ namespace CombatClub
             Button b1, Button b2, Button b3, ProgressBar barPlayer, ProgressBar barComp)
         {
 
-            player = new Player(playerName, 20);
+            player = new Player(playerName, 3);
             computerPlayer = new ComputerPlayer(compName, 30);
 
             player.Block += new EventHandler<PlayerEventArgs>(OnBlockMessage);
@@ -37,7 +37,7 @@ namespace CombatClub
             computerPlayer.Wound += new EventHandler<PlayerEventArgs>(OnWoundMessage);
 
             player.Death += new EventHandler<PlayerEventArgs>(OnDeathMessage);
-            computerPlayer.Death += new EventHandler<PlayerEventArgs>(OnDeathMessage);
+            computerPlayer.Death += new EventHandler<PlayerEventArgs>(OnDeathMessage);            
 
             this.lstBox = listBox;
             this.labelPlayerName = labelPlayerName;

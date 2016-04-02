@@ -24,6 +24,11 @@ namespace CombatClub
         {
             lstBox.Items.Add(args.name + "ваш игрок убит :(");
             PrintToLabel(sender);
+            player = null;
+            computerPlayer = null;
+            b1.Enabled = false;
+            b2.Enabled = false;
+            b3.Enabled = false;
         }
     }
 }
