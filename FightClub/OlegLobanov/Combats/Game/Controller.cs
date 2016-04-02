@@ -26,12 +26,12 @@ namespace Combats
 
        StringBuilder log = new StringBuilder(1024);
 
-       public Controller(Player human, CompPlayer enemy)
+       public Controller(Player human, Player enemy)
        {
            status="Игрок атакует...";
            StartGame(human, enemy);
        }
-       public void StartGame(Player human,CompPlayer enemy)
+       public void StartGame(Player human,Player enemy)
        {
            this.human = human;
            this.comp = enemy;
@@ -95,7 +95,9 @@ namespace Combats
            if (phase == Phase.First)
            {
                status = "Игрок защищается...";
-               ((CompPlayer)comp).EasyRandDefence();
+               (comp).EasyRandDefence();
+               
+
                comp.GetHit(userinput, human.Damage);
                phase = Phase.Second;
                
@@ -104,7 +106,7 @@ namespace Combats
            {
                status = "Игрок атакует...";
                human.SetBlock(userinput);
-               human.GetHit(((CompPlayer)comp).EasyRandAttack(), comp.Damage);
+               human.GetHit((comp).EasyRandAttack(), comp.Damage);
                phase = Phase.First;
 
                Round++;

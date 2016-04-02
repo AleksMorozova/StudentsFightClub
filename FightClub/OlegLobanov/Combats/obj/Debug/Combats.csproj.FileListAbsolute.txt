@@ -7,7 +7,6 @@ c:\users\oleg\documents\visual studio 2012\Projects\Combats\Combats\obj\Debug\Co
 c:\users\oleg\documents\visual studio 2012\Projects\Combats\Combats\obj\Debug\Combats.pdb
 C:\Users\Oleg\Documents\StudentsFightClub\FightClub\OlegLobanov\Combats\obj\Debug\Combats.exe
 C:\Users\Oleg\Documents\StudentsFightClub\FightClub\OlegLobanov\Combats\obj\Debug\Combats.pdb
-C:\Users\Oleg\Documents\StudentsFightClub\FightClub\OlegLobanov\Combats\obj\Debug\Combats.csprojResolveAssemblyReference.cache
 C:\Users\Oleg\Documents\StudentsFightClub\FightClub\OlegLobanov\Combats\obj\Debug\Combats.Combats.resources
 C:\Users\Oleg\Documents\StudentsFightClub\FightClub\OlegLobanov\Combats\obj\Debug\Combats.Properties.Resources.resources
 C:\Users\Oleg\Documents\StudentsFightClub\FightClub\OlegLobanov\Combats\obj\Debug\Combats.csproj.GenerateResource.Cache

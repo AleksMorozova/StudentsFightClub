@@ -68,5 +68,17 @@ namespace Combats
             }
         }
 
+        Random rand = new Random(DateTime.Now.Millisecond);
+        int maxvalue = Enum.GetValues(typeof(BodyPart)).Length + 1;
+
+        public void EasyRandDefence()
+        {
+            Blocked = ((BodyPart)rand.Next(1, maxvalue));
+        }
+        public BodyPart EasyRandAttack()
+        {
+            return (BodyPart)rand.Next(1, maxvalue);
+        }
+
     }
 }
