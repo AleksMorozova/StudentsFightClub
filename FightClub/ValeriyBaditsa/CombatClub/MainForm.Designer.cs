@@ -1,6 +1,6 @@
 ﻿namespace CombatClub
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Требуется переменная конструктора.
@@ -54,8 +54,7 @@
             this.buttonHead.Name = "buttonHead";
             this.buttonHead.Size = new System.Drawing.Size(150, 32);
             this.buttonHead.TabIndex = 0;
-            this.buttonHead.UseVisualStyleBackColor = true;
-            this.buttonHead.Click += new System.EventHandler(this.buttonHead_Click);
+            this.buttonHead.UseVisualStyleBackColor = true;           
             // 
             // buttonBody
             // 
@@ -64,7 +63,6 @@
             this.buttonBody.Size = new System.Drawing.Size(150, 32);
             this.buttonBody.TabIndex = 1;
             this.buttonBody.UseVisualStyleBackColor = true;
-            this.buttonBody.Click += new System.EventHandler(this.buttonBody_Click);
             // 
             // buttonLegs
             // 
@@ -73,7 +71,6 @@
             this.buttonLegs.Size = new System.Drawing.Size(150, 32);
             this.buttonLegs.TabIndex = 2;
             this.buttonLegs.UseVisualStyleBackColor = true;
-            this.buttonLegs.Click += new System.EventHandler(this.buttonLegs_Click);
             // 
             // pictureBox1
             // 
@@ -113,8 +110,7 @@
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
             this.newGameToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.newGameToolStripMenuItem.Text = "New game";
-            this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGameToolStripMenuItem_Click);
+            this.newGameToolStripMenuItem.Text = "New game";            
             // 
             // progressBarPlayer
             // 
@@ -175,7 +171,7 @@
             this.labelCompPlayerHP.Size = new System.Drawing.Size(0, 13);
             this.labelCompPlayerHP.TabIndex = 13;
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -194,9 +190,8 @@
             this.Controls.Add(this.buttonHead);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
-            this.Text = "Combat club";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Name = "MainForm";
+            this.Text = "Combat club";            
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.menuStrip1.ResumeLayout(false);

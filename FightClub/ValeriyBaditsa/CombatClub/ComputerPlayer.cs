@@ -16,12 +16,12 @@ namespace CombatClub
         {            
                         
         }
-       //dmd
+       
         override public void GetHit(BodyParts bodyPart)             
-        {
-            bodyPart = RandomBodyPart();
+        {            
             base.GetHit(bodyPart);                        
         }
+
         public BodyParts testc()
         {
             return BodyParts.body;
