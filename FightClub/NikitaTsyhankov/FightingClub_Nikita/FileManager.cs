@@ -1,69 +1,33 @@
-﻿using GameProcess.BL;
-using System;
+﻿using System;
 using System.IO;
-using System.Windows.Forms;
-using System.Runtime.Serialization.Formatters.Binary;
+using GameProcess;
 using System.Collections.Generic;
 
 namespace FightingClub_Nikita
 {
-    [Serializable]
+    interface IManager
+    {
+        void SaveLog(String _log);
+        void SaveGame(Logic _process);
+        Logic LoadGame();
+    }
     public class FileManager : IManager
     {
-        public void SaveLog(List<string> _log)
+        public void SaveLog(String _log)
         {
-            try
+            using (StreamWriter writer = new StreamWriter(new FileStream("log.txt", FileMode.Append)))
             {
-                StreamWriter w = File.AppendText("log.txt");
-                w.WriteLine();
-                w.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(),
-                        DateTime.Now.ToLongDateString());
-                foreach (string item in _log)
-                {
-                    w.WriteLine(item);
-                }
-                w.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                writer.Write(_log);
             }
         }
 
-        public void SaveGame(IFighting _process)
+        public void SaveGame(Logic _process)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Battle|*btl*";
-            sfd.FileName = "SavedGame.btl";
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                Stream FileStream = File.Create(sfd.FileName);
-                BinaryFormatter serializer = new BinaryFormatter();
-                serializer.Serialize(FileStream, _process);
-                FileStream.Close();
-            }
+
         }
-        public IFighting LoadGame()
+        public Logic LoadGame()
         {
-            IFighting _process = null;
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Battle|*btl*";
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                Stream FileStream = File.OpenRead(ofd.FileName);
-                BinaryFormatter deserializer = new BinaryFormatter();
-                try
-                {
-                    _process = (IFighting)deserializer.Deserialize(FileStream);
-                    MessageBox.Show("Game loaded.");
-                }
-                catch
-                {
-                    MessageBox.Show("Can't load game. Try again.");
-                }
-                FileStream.Close();
-            }
-            return _process;
+            return null;
         }
     }
 }

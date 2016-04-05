@@ -1,5 +1,5 @@
 ﻿public enum RoundHalf
 {
-    HumanAttack,
-    CPUAttack
+    Attack,
+    Defend
 }

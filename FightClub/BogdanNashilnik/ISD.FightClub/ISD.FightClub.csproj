@@ -50,18 +50,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Creator.cs" />
     <Compile Include="FormView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormView.Designer.cs">
       <DependentUpon>FormView.cs</DependentUpon>
     </Compile>
-    <Compile Include="ILoggable.cs" />
-    <Compile Include="IPresenter.cs" />
+    <Compile Include="GuiPosition.cs" />
+    <Compile Include="ILogable.cs" />
     <Compile Include="IView.cs" />
-    <Compile Include="Log.cs" />
-    <Compile Include="MortalCombatCreator.cs" />
     <Compile Include="Presenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

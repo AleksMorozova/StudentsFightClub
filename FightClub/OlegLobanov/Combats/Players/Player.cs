@@ -29,13 +29,13 @@ namespace Combats
             this.SetBlock(BodyPart.Head);
         }
 
-        public virtual void GetHit(BodyPart part, int damage)
+        public void GetHit(BodyPart part, int damage)
         {
             if (Blocked == part)
             {
                 if (Block != null)
                 {
-                    Block(this,new PlayerEventArgs(this.Name,this.HP));
+                    Block(this);
                 }
             }
             else
@@ -45,7 +45,7 @@ namespace Combats
 
         }
         
-        public virtual void SetBlock(BodyPart part)
+        public void SetBlock(BodyPart part)
         {
             Blocked = part;
         }
@@ -55,7 +55,7 @@ namespace Combats
             HP -= damage;
             if (Wound != null)
             {
-                Wound(this, new PlayerEventArgs(this.Name, this.HP));
+                Wound(this);
             }
 
             if (HP <= 0)
@@ -63,21 +63,9 @@ namespace Combats
                 HP = 0;
                 if (Death != null)
                 {
-                    Death(this, new PlayerEventArgs(this.Name, this.HP));
+                    Death(this);
                 }
             }
-        }
-
-        Random rand = new Random(DateTime.Now.Millisecond);
-        int maxvalue = Enum.GetValues(typeof(BodyPart)).Length + 1;
-
-        public void EasyRandDefence()
-        {
-            Blocked = ((BodyPart)rand.Next(1, maxvalue));
-        }
-        public BodyPart EasyRandAttack()
-        {
-            return (BodyPart)rand.Next(1, maxvalue);
         }
 
     }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace FightClubLogic.Tests
 {
@@ -10,17 +9,37 @@ namespace FightClubLogic.Tests
         public void BattleTest()
         {
             Fighter f1 = new Fighter("123", 15, 5);
-            CPUFighter f2 = new CPUFighter("abc", 25, 10);
+            Fighter f2 = new Fighter("abc", 25, 10);
             Battle battle = new Battle(f1, f2);
 
             Assert.AreEqual(f1, battle.Fighter1);
             Assert.AreEqual(f2, battle.Fighter2);
             Assert.AreEqual(battle.Round, 1);
-            Assert.AreEqual(battle.RoundHalf, RoundHalf.HumanAttack);
+            Assert.AreEqual(battle.RoundHalf, RoundHalf.Attack);
         }
 
         [TestMethod()]
         public void ActionTest()
+        {
+            Fighter f1 = new Fighter("123", 15, 5);
+            Fighter f2 = new Fighter("123", 15, 5);
+            Battle battle = new Battle(f1, f2);
+
+            battle.Action(BodyPart.Head, BodyPart.Body);
+            Assert.AreEqual(battle.Fighter1.HP, 15);
+            Assert.AreEqual(battle.Fighter2.HP, 10);
+            Assert.AreEqual(battle.Round, 1);
+            Assert.AreEqual(battle.RoundHalf, RoundHalf.Defend);
+
+            battle.Action(BodyPart.Head, BodyPart.Head);
+            Assert.AreEqual(battle.Fighter1.HP, 15);
+            Assert.AreEqual(battle.Fighter2.HP, 10);
+            Assert.AreEqual(battle.Round, 2);
+            Assert.AreEqual(battle.RoundHalf, RoundHalf.Attack);
+        }
+
+        [TestMethod()]
+        public void AttackCPUTest()
         {
             bool headGenerated = false;
             bool bodyGenerated = false;
@@ -28,9 +47,9 @@ namespace FightClubLogic.Tests
             do
             {
                 Fighter f1 = new Fighter("123", 15, 5);
-                CPUFighter f2 = new CPUFighter("123", 15, 5);
+                Fighter f2 = new Fighter("123", 15, 5);
                 Battle battle = new Battle(f1, f2);
-                battle.Action(BodyPart.Head);
+                battle.AttackCPU(BodyPart.Head);
                 if (battle.Fighter2.Blocked == BodyPart.Head)
                 {
                     Assert.AreEqual(battle.Fighter2.HP, 15);
@@ -40,7 +59,7 @@ namespace FightClubLogic.Tests
                 {
                     Assert.AreEqual(battle.Fighter2.HP, 10);
                     bodyGenerated = true;
-                }
+                } 
                 else
                 {
                     Assert.AreEqual(battle.Fighter2.HP, 10);
@@ -48,28 +67,29 @@ namespace FightClubLogic.Tests
                 }
             } while (!(headGenerated && bodyGenerated && legsGenerated));
         }
+
         [TestMethod()]
-        public void BattleCanEnd()
+        public void EventsTest()
         {
+            bool eventRoundRecieved = false;
+            int eventHalfRecieved = 0;
             Fighter f1 = new Fighter("123", 15, 5);
-            CPUFighter f2 = new CPUFighter("123", 15, 5);
+            Fighter f2 = new Fighter("abc", 25, 10);
             Battle battle = new Battle(f1, f2);
-
-            bool eventRecieved = false;
-            battle.Fighter1.Death += delegate (object sender, EventArgs e)
+            battle.RoundChanged += delegate (Battle sender)
             {
-                eventRecieved = true;
+                eventRoundRecieved = true;
             };
-            battle.Fighter2.Death += delegate (object sender, EventArgs e)
+            battle.RoundHalfChanged += delegate (Battle sender)
             {
-                eventRecieved = true;
+                eventHalfRecieved++;
             };
 
-            while (!eventRecieved)
-            {
-                battle.Action(BodyPart.Head);
-            }
-            Assert.AreEqual(eventRecieved, true);
+            battle.Action(BodyPart.Body, BodyPart.Body);
+            battle.Action(BodyPart.Body, BodyPart.Body);
+
+            Assert.AreEqual(eventRoundRecieved, true);
+            Assert.AreEqual(eventHalfRecieved, 2);
         }
     }
 }

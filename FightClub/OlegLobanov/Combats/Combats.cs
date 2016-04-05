@@ -84,8 +84,6 @@ namespace Combats
 
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            p.GameEnded -= Lock;
-            p.Logged -= LogToBox;
             ConnectNewGame();
         }
 

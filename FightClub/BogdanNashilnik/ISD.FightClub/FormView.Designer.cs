@@ -39,8 +39,7 @@
             this.progressBarRightFighter = new System.Windows.Forms.ProgressBar();
             this.pictureBoxRightFighter = new System.Windows.Forms.PictureBox();
             this.panelControl = new System.Windows.Forms.Panel();
-            this.labelRoundCount = new System.Windows.Forms.Label();
-            this.listBoxLog = new System.Windows.Forms.ListBox();
+            this.log = new System.Windows.Forms.ListBox();
             this.labelAction = new System.Windows.Forms.Label();
             this.labelRound = new System.Windows.Forms.Label();
             this.buttonLegs = new System.Windows.Forms.Button();
@@ -178,8 +177,7 @@
             this.panelControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelControl.Controls.Add(this.labelRoundCount);
-            this.panelControl.Controls.Add(this.listBoxLog);
+            this.panelControl.Controls.Add(this.log);
             this.panelControl.Controls.Add(this.labelAction);
             this.panelControl.Controls.Add(this.labelRound);
             this.panelControl.Controls.Add(this.buttonLegs);
@@ -190,25 +188,14 @@
             this.panelControl.Size = new System.Drawing.Size(330, 552);
             this.panelControl.TabIndex = 5;
             // 
-            // labelRoundCount
+            // log
             // 
-            this.labelRoundCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelRoundCount.AutoSize = true;
-            this.labelRoundCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelRoundCount.Location = new System.Drawing.Point(55, 7);
-            this.labelRoundCount.Name = "labelRoundCount";
-            this.labelRoundCount.Size = new System.Drawing.Size(18, 20);
-            this.labelRoundCount.TabIndex = 7;
-            this.labelRoundCount.Text = "1";
-            // 
-            // listBoxLog
-            // 
-            this.listBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBoxLog.FormattingEnabled = true;
-            this.listBoxLog.Location = new System.Drawing.Point(7, 343);
-            this.listBoxLog.Name = "listBoxLog";
-            this.listBoxLog.Size = new System.Drawing.Size(320, 212);
-            this.listBoxLog.TabIndex = 6;
+            this.log.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.log.FormattingEnabled = true;
+            this.log.Location = new System.Drawing.Point(7, 343);
+            this.log.Name = "log";
+            this.log.Size = new System.Drawing.Size(320, 212);
+            this.log.TabIndex = 6;
             // 
             // labelAction
             // 
@@ -226,11 +213,11 @@
             this.labelRound.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.labelRound.AutoSize = true;
             this.labelRound.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelRound.Location = new System.Drawing.Point(3, 7);
+            this.labelRound.Location = new System.Drawing.Point(3, 6);
             this.labelRound.Name = "labelRound";
-            this.labelRound.Size = new System.Drawing.Size(55, 20);
+            this.labelRound.Size = new System.Drawing.Size(68, 20);
             this.labelRound.TabIndex = 3;
-            this.labelRound.Text = "Раунд";
+            this.labelRound.Text = "Раунд 1";
             // 
             // buttonLegs
             // 
@@ -353,7 +340,7 @@
         private System.Windows.Forms.Button buttonBody;
         private System.Windows.Forms.Label labelAction;
         private System.Windows.Forms.Label labelRound;
-        private System.Windows.Forms.ListBox listBoxLog;
+        private System.Windows.Forms.ListBox log;
         private System.Windows.Forms.Label labelHPLeftFighter;
         private System.Windows.Forms.Label labelHPRightFighter;
         private System.Windows.Forms.MenuStrip menuStrip;
@@ -362,7 +349,6 @@
         private System.Windows.Forms.ToolStripMenuItem сохранитьБойВФайлToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialogSaveBattle;
         private System.Windows.Forms.OpenFileDialog openFileDialogOpenBattle;
-        private System.Windows.Forms.Label labelRoundCount;
     }
 }
 

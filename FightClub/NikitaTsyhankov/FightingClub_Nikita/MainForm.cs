@@ -1,10 +1,43 @@
-﻿using GameProcess.BL;
-using GameProcess.BL.Fighters;
+﻿using GameProcess;
+using GameProcess.Fighters;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace FightingClub_Nikita
 {
+    public interface IGameForm
+    {
+        string NamePlayer1
+        {
+            get;
+            set;
+        }
+        string NameCPUPlayer
+        {
+            set;
+        }
+        bool Title
+        {
+            set;
+        }
+        int Rounds
+        {
+            set;
+        }
+        string Log
+        {
+            get;
+            set;
+        }
+        void HPPlayers(int player1, int player2);
+        event EventHandler<EventArgsBodyParts> ButHeadClick;
+        event EventHandler<EventArgsBodyParts> ButBodyClick;
+        event EventHandler<EventArgsBodyParts> ButLegClick;
+        event EventHandler ButLoadGameClick;
+        event EventHandler ButSaveGameClick;
+    }
+
     public partial class MainForm : Form, IGameForm
     {
         public event EventHandler<EventArgsBodyParts> ButHeadClick;
@@ -14,10 +47,12 @@ namespace FightingClub_Nikita
         public event EventHandler ButSaveGameClick;
 
         private StartForm start = new StartForm();
+        private EventArgsBodyParts argsPart;
 
         public MainForm()
         {
             InitializeComponent();
+            argsPart = new EventArgsBodyParts();
             start.ShowDialog();
             NamePlayer1 = start.StartName;
         }
@@ -29,42 +64,27 @@ namespace FightingClub_Nikita
             butHead.Enabled = false;
             butBody.Enabled = false;
             butLeg.Enabled = false;
+            listBoxLog.Items.Add("*Log saved*. Log saved to the root directory");
         }
-        public void UnblockGame()
-        {
-            lblFinish.Visible = false;
-            butHead.Enabled = true;
-            butBody.Enabled = true;
-            butLeg.Enabled = true;
-        }
-        public void ClearLog()
-        {
-            listBoxLog.Items.Clear();
-        }
-
         #region Events
         private void butHead_Click(object sender, EventArgs e)
         {
-            if (ButHeadClick != null) ButHeadClick(this, 
-                new EventArgsBodyParts(BodyParts._head));
+            argsPart._part = BodyParts._head;
+            if (ButHeadClick != null) ButHeadClick(this, argsPart);
         }
 
         private void butBody_Click(object sender, EventArgs e)
         {
-            if (ButBodyClick != null) ButBodyClick(this,
-                new EventArgsBodyParts(BodyParts._body));
+            argsPart._part = BodyParts._body;
+            if (ButBodyClick != null) ButBodyClick(this, argsPart);
         }
 
         private void butLeg_Click(object sender, EventArgs e)
         {
-            if (ButLegClick != null) ButLegClick(this,
-                new EventArgsBodyParts(BodyParts._leg));
+            argsPart._part = BodyParts._leg;
+            if (ButLegClick != null) ButLegClick(this, argsPart);
         }
-        private void saveGameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (ButSaveGameClick != null) ButSaveGameClick(this, EventArgs.Empty);
-        }
-        private void loadGameToolStripMenuItem_Click(object sender, EventArgs e)
+        private void openLogFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ButLoadGameClick != null) ButLoadGameClick(this, EventArgs.Empty);
         }
@@ -115,7 +135,6 @@ namespace FightingClub_Nikita
         }
         public int Rounds
         {
-            get { return Int32.Parse(lblRounds.Text); }
             set
             {
                 lblRounds.Text = value.ToString();
@@ -123,6 +142,7 @@ namespace FightingClub_Nikita
         }
         public string Log
         {
+            get { return listBoxLog.Text; }
             set
             {
                 listBoxLog.Items.Add(value);

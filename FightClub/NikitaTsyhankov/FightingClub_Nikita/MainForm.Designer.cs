@@ -32,9 +32,7 @@
             this.menuMainStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
+            this.openLogFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblTitle = new System.Windows.Forms.Label();
             this.butHead = new System.Windows.Forms.Button();
@@ -74,9 +72,7 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newGameToolStripMenuItem,
-            this.saveGameToolStripMenuItem,
-            this.loadGameToolStripMenuItem,
-            this.stToolStripMenuItem,
+            this.openLogFileToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 19);
@@ -85,33 +81,21 @@
             // newGameToolStripMenuItem
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.newGameToolStripMenuItem.Text = "New game";
             this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGameToolStripMenuItem_Click);
             // 
-            // saveGameToolStripMenuItem
+            // openLogFileToolStripMenuItem
             // 
-            this.saveGameToolStripMenuItem.Name = "saveGameToolStripMenuItem";
-            this.saveGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.saveGameToolStripMenuItem.Text = "Save game";
-            this.saveGameToolStripMenuItem.Click += new System.EventHandler(this.saveGameToolStripMenuItem_Click);
-            // 
-            // loadGameToolStripMenuItem
-            // 
-            this.loadGameToolStripMenuItem.Name = "loadGameToolStripMenuItem";
-            this.loadGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.loadGameToolStripMenuItem.Text = "Load game";
-            this.loadGameToolStripMenuItem.Click += new System.EventHandler(this.loadGameToolStripMenuItem_Click);
-            // 
-            // stToolStripMenuItem
-            // 
-            this.stToolStripMenuItem.Name = "stToolStripMenuItem";
-            this.stToolStripMenuItem.Size = new System.Drawing.Size(149, 6);
+            this.openLogFileToolStripMenuItem.Name = "openLogFileToolStripMenuItem";
+            this.openLogFileToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.openLogFileToolStripMenuItem.Text = "Open log file";
+            this.openLogFileToolStripMenuItem.Click += new System.EventHandler(this.openLogFileToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -283,13 +267,12 @@
             // 
             // listBoxLog
             // 
-            this.listBoxLog.Font = new System.Drawing.Font("Monotype Corsiva", 14.25F, System.Drawing.FontStyle.Italic);
+            this.listBoxLog.Font = new System.Drawing.Font("Monotype Corsiva", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.listBoxLog.FormattingEnabled = true;
-            this.listBoxLog.ItemHeight = 22;
+            this.listBoxLog.ItemHeight = 18;
             this.listBoxLog.Location = new System.Drawing.Point(12, 352);
             this.listBoxLog.Name = "listBoxLog";
-            this.listBoxLog.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBoxLog.Size = new System.Drawing.Size(761, 136);
+            this.listBoxLog.Size = new System.Drawing.Size(761, 130);
             this.listBoxLog.TabIndex = 22;
             // 
             // MainForm
@@ -335,7 +318,7 @@
         private System.Windows.Forms.MenuStrip menuMainStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newGameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadGameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openLogFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button butHead;
@@ -353,8 +336,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRounds;
         private System.Windows.Forms.Label lblFinish;
-        private System.Windows.Forms.ToolStripMenuItem saveGameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator stToolStripMenuItem;
         private System.Windows.Forms.ListBox listBoxLog;
     }
 }

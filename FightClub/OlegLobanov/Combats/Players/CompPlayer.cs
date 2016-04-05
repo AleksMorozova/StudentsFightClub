@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -9,24 +8,16 @@ namespace Combats
      public class CompPlayer:Player
     {
         public CompPlayer(string name, int hp, int damage) : base(name, hp, damage) { }
-        
+        Random rand = new Random(DateTime.Now.Millisecond);
+        int maxvalue = Enum.GetValues(typeof(BodyPart)).Length +1;
 
-        // - GetHit, SetBlock methods should be virtual and must be overriden in CompPlayer class
-        public override void GetHit(BodyPart part, int damage)
+        public void EasyRandDefence()
         {
-            Debug.WriteLine("BotGetHit");
-
-            base.GetHit(part, damage);
+            SetBlock((BodyPart)rand.Next(1, maxvalue));
         }
-
-         // part will be ignored
-        public override void SetBlock(BodyPart part)
+        public BodyPart EasyRandAttack()
         {
-            Debug.WriteLine("BotSetBlock");
-
-            EasyRandDefence();
-            
+            return (BodyPart)rand.Next(1, maxvalue);
         }
-        
     }
 }

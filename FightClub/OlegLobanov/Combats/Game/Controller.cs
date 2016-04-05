@@ -14,7 +14,8 @@ namespace Combats
     public class Controller:ILoggable
     {
        public Player human {get;private set;}
-       public Player comp {get;private set;}
+       public CompPlayer comp {get;private set;}
+
 
        public string status { get; private set; }
        public int Round{get;private set;}
@@ -26,12 +27,12 @@ namespace Combats
 
        StringBuilder log = new StringBuilder(1024);
 
-       public Controller(Player human, Player enemy)
+       public Controller(Player human, CompPlayer enemy)
        {
            status="Игрок атакует...";
            StartGame(human, enemy);
        }
-       public void StartGame(Player human,Player enemy)
+       public void StartGame(Player human,CompPlayer enemy)
        {
            this.human = human;
            this.comp = enemy;
@@ -54,22 +55,13 @@ namespace Combats
            AddToLog(status);
 
            SaveLog();
-           human.Death -= Dead;
-           comp.Death -= Dead;
-
-           human.Wound -= Wounded;
-           comp.Wound -= Wounded;
-
-           human.Block -= Blocked;
-           comp.Block -= Blocked;
-
            if (GameEnded != null)
            {
                GameEnded();
            }
        }
 
-       void Dead(Player sender, PlayerEventArgs e)
+       void Dead(Player sender)
        {
            AddToLog(sender.Name + " рассыпался на кусочки");
            if (sender.Equals(human))
@@ -81,13 +73,13 @@ namespace Combats
                EndGame(human);
            }
        }
-       void Wounded(Player sender, PlayerEventArgs e)
+       void Wounded(Player sender)
        {
-           AddToLog(e.Name + " получает удар");
+           AddToLog(sender.Name + " получает удар");
        }
-       void Blocked(Player sender, PlayerEventArgs e)
+       void Blocked(Player sender)
        {
-           AddToLog(e.Name + " заблокировал удар");
+           AddToLog(sender.Name + " заблокировал удар");
        }
 
         public void Tick(BodyPart userinput)
@@ -95,9 +87,7 @@ namespace Combats
            if (phase == Phase.First)
            {
                status = "Игрок защищается...";
-               (comp).EasyRandDefence();
-               
-
+               comp.EasyRandDefence();
                comp.GetHit(userinput, human.Damage);
                phase = Phase.Second;
                
@@ -106,10 +96,11 @@ namespace Combats
            {
                status = "Игрок атакует...";
                human.SetBlock(userinput);
-               human.GetHit((comp).EasyRandAttack(), comp.Damage);
+               human.GetHit(comp.EasyRandAttack(), comp.Damage);
                phase = Phase.First;
 
                Round++;
+               
            }
            
        }

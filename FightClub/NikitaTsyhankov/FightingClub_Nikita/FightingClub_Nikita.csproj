@@ -47,8 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileManager.cs" />
-    <Compile Include="IGameForm.cs" />
-    <Compile Include="IManager.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,16 +92,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GameProcess\GameProcess.BL.csproj">
+      <Project>{5f87480e-10cd-4ac8-86d4-0015e7500e4d}</Project>
+      <Name>GameProcess.BL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\Fighter1.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Fighter2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GameProcess.BL\GameProcess.BL.csproj">
-      <Project>{e1de34eb-47b7-4970-a640-b921740f7ad5}</Project>
-      <Name>GameProcess.BL</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

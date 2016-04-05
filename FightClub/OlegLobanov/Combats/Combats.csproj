@@ -54,7 +54,6 @@
     </Compile>
     <Compile Include="Players\IFighter.cs" />
     <Compile Include="Players\Player.cs" />
-    <Compile Include="Players\PlayerEventArgs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Combats.resx">

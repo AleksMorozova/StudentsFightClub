@@ -1,4 +1,4 @@
-﻿using GameProcess.BL;
+﻿using GameProcess;
 using System;
 using System.Windows.Forms;
 
