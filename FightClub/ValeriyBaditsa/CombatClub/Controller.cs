@@ -16,7 +16,13 @@ namespace CombatClub
         {  
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());            
+
+            MainForm mainForm = new MainForm();           
+            Player player = new Player("valera", 3);
+            Player compPlayer = new ComputerPlayer("comp", 33);
+            Presenter presente = new Presenter(mainForm, player, compPlayer);            
+                      
+            Application.Run(mainForm);            
             
         }
 

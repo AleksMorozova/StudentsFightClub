@@ -8,14 +8,13 @@ namespace CombatClub
 {     
     enum BodyParts {head, body, legs};
 
-    class Player
+    class Player : IPlayer
     {    
         public delegate void Del(object sender, PlayerEventArgs args);        
-        const int startHp = 3;
 
         public string Name { get; set; }
         public BodyParts Blocked { get; set; }
-        public int Hp {get; set;}      
+        public int Hp { get; set; }        
         int Damage { get; set; }
         public bool Attacker { get; set; }
         public BodyParts Attacked { get; set; }         
@@ -44,11 +43,14 @@ namespace CombatClub
                 {
                     Hp--;
                     if (Hp > 0)
-                    {                        
+                    {
                         OnWound();
                     }
                     else
+                    {
+                        OnWound();
                         OnDeath();
+                    }
                 }
         }
 
