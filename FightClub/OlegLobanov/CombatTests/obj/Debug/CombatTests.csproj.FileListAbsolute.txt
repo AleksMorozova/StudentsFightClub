@@ -1,0 +1,14 @@
+C:\Users\Oleg\Documents\Visual Studio 2012\Projects\Combats\CombatTests\bin\Debug\CombatTests.dll
+C:\Users\Oleg\Documents\Visual Studio 2012\Projects\Combats\CombatTests\bin\Debug\CombatTests.pdb
+C:\Users\Oleg\Documents\Visual Studio 2012\Projects\Combats\CombatTests\bin\Debug\Combats.exe
+C:\Users\Oleg\Documents\Visual Studio 2012\Projects\Combats\CombatTests\bin\Debug\Combats.pdb
+C:\Users\Oleg\Documents\Visual Studio 2012\Projects\Combats\CombatTests\obj\Debug\CombatTests.csprojResolveAssemblyReference.cache
+C:\Users\Oleg\Documents\Visual Studio 2012\Projects\Combats\CombatTests\obj\Debug\CombatTests.dll
+C:\Users\Oleg\Documents\Visual Studio 2012\Projects\Combats\CombatTests\obj\Debug\CombatTests.pdb
+C:\Users\Oleg\Documents\StudentsFightClub\FightClub\OlegLobanov\CombatTests\obj\Debug\CombatTests.csprojResolveAssemblyReference.cache
+C:\Users\Oleg\Documents\StudentsFightClub\FightClub\OlegLobanov\CombatTests\obj\Debug\CombatTests.dll
+C:\Users\Oleg\Documents\StudentsFightClub\FightClub\OlegLobanov\CombatTests\bin\Debug\CombatTests.dll
+C:\Users\Oleg\Documents\StudentsFightClub\FightClub\OlegLobanov\CombatTests\bin\Debug\CombatTests.pdb
+C:\Users\Oleg\Documents\StudentsFightClub\FightClub\OlegLobanov\CombatTests\bin\Debug\Combats.exe
+C:\Users\Oleg\Documents\StudentsFightClub\FightClub\OlegLobanov\CombatTests\bin\Debug\Combats.pdb
+C:\Users\Oleg\Documents\StudentsFightClub\FightClub\OlegLobanov\CombatTests\obj\Debug\CombatTests.pdb

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISD.FightClub", "ISD.FightClub\ISD.FightClub.csproj", "{A00FA53C-A973-4E61-AEB0-E3AB982B0896}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FightClubLogic", "FightClubLogic\FightClubLogic.csproj", "{19155B93-01D1-450F-87B1-34C556403810}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FightClubLogicTests", "FightClubLogicTests\FightClubLogicTests.csproj", "{3173DF80-A617-4060-A861-A489790E3E50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A00FA53C-A973-4E61-AEB0-E3AB982B0896}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A00FA53C-A973-4E61-AEB0-E3AB982B0896}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A00FA53C-A973-4E61-AEB0-E3AB982B0896}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A00FA53C-A973-4E61-AEB0-E3AB982B0896}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19155B93-01D1-450F-87B1-34C556403810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19155B93-01D1-450F-87B1-34C556403810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19155B93-01D1-450F-87B1-34C556403810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19155B93-01D1-450F-87B1-34C556403810}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3173DF80-A617-4060-A861-A489790E3E50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3173DF80-A617-4060-A861-A489790E3E50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3173DF80-A617-4060-A861-A489790E3E50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3173DF80-A617-4060-A861-A489790E3E50}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
