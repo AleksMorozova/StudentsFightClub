@@ -1,7 +1,0 @@
-c:\users\oleg\documents\visual studio 2012\Projects\Combats\Combats\obj\Debug\Combats.Combats.resources
-c:\users\oleg\documents\visual studio 2012\Projects\Combats\Combats\obj\Debug\Combats.Properties.Resources.resources
-c:\users\oleg\documents\visual studio 2012\Projects\Combats\Combats\obj\Debug\Combats.csproj.GenerateResource.Cache
-c:\users\oleg\documents\visual studio 2012\Projects\Combats\Combats\bin\Debug\Combats.exe
-c:\users\oleg\documents\visual studio 2012\Projects\Combats\Combats\bin\Debug\Combats.pdb
-c:\users\oleg\documents\visual studio 2012\Projects\Combats\Combats\obj\Debug\Combats.exe
-c:\users\oleg\documents\visual studio 2012\Projects\Combats\Combats\obj\Debug\Combats.pdb

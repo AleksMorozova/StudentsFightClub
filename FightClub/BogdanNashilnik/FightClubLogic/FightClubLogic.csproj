@@ -42,7 +42,9 @@
   <ItemGroup>
     <Compile Include="Battle.cs" />
     <Compile Include="BodyPart.cs" />
+    <Compile Include="CPUFighter.cs" />
     <Compile Include="Fighter.cs" />
+    <Compile Include="FighterEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoundHalf.cs" />
   </ItemGroup>
