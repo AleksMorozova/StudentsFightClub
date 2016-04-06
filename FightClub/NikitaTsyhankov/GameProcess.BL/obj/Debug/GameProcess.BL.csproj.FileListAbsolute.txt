@@ -1,5 +1,0 @@
-C:\Users\Bogdan\Source\Repos\StudentsFightClub2\FightClub\NikitaTsyhankov\GameProcess.BL\bin\Debug\GameProcess.BL.dll
-C:\Users\Bogdan\Source\Repos\StudentsFightClub2\FightClub\NikitaTsyhankov\GameProcess.BL\bin\Debug\GameProcess.BL.pdb
-C:\Users\Bogdan\Source\Repos\StudentsFightClub2\FightClub\NikitaTsyhankov\GameProcess.BL\obj\Debug\GameProcess.BL.csprojResolveAssemblyReference.cache
-C:\Users\Bogdan\Source\Repos\StudentsFightClub2\FightClub\NikitaTsyhankov\GameProcess.BL\obj\Debug\GameProcess.BL.dll
-C:\Users\Bogdan\Source\Repos\StudentsFightClub2\FightClub\NikitaTsyhankov\GameProcess.BL\obj\Debug\GameProcess.BL.pdb
