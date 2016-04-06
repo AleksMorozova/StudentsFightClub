@@ -79,7 +79,7 @@ namespace FightClubLogic.Tests
 
             fighter.SetBlock(BodyPart.Head);
             Assert.AreEqual(fighter.Blocked, BodyPart.Head);
-            
+
             fighter.SetBlock(BodyPart.Body);
             Assert.AreEqual(fighter.Blocked, BodyPart.Body);
 
@@ -95,7 +95,7 @@ namespace FightClubLogic.Tests
             fighter.SetBlock(BodyPart.Head);
             bool eventRecieved = false;
 
-            fighter.Block += delegate (Fighter sender)
+            fighter.Block += delegate (object sender, EventArgs e)
             {
                 eventRecieved = true;
             };
@@ -109,7 +109,7 @@ namespace FightClubLogic.Tests
             Fighter fighter = new Fighter("123", 15, 0);
             fighter.SetBlock(BodyPart.Head);
             bool eventRecieved = false;
-            fighter.Block += delegate (Fighter sender)
+            fighter.Block += delegate (object sender, EventArgs e)
             {
                 eventRecieved = true;
             };
@@ -130,18 +130,18 @@ namespace FightClubLogic.Tests
             Fighter fighter = new Fighter("123", 15, 0);
             fighter.SetBlock(BodyPart.Head);
             bool eventRecieved = false;
-            fighter.Wound += delegate (Fighter sender, int damage)
+            fighter.Wound += delegate (object sender, EventArgs e)
             {
                 eventRecieved = true;
             };
 
             fighter.GetHit(BodyPart.Body, 5);
             Assert.AreEqual(eventRecieved, true);
-            
+
             eventRecieved = false;
             fighter.GetHit(BodyPart.Body, -10);
             Assert.AreEqual(eventRecieved, false);
-            
+
             eventRecieved = false;
             fighter.GetHit(BodyPart.Body, 0);
             Assert.AreEqual(eventRecieved, true);
@@ -157,7 +157,7 @@ namespace FightClubLogic.Tests
             Fighter fighter = new Fighter("123", 15, 0);
             fighter.SetBlock(BodyPart.Head);
             bool eventRecieved = false;
-            fighter.Wound += delegate (Fighter sender, int damage)
+            fighter.Wound += delegate (object sender, EventArgs e)
             {
                 eventRecieved = true;
             };
@@ -171,11 +171,11 @@ namespace FightClubLogic.Tests
             Fighter fighter = new Fighter("123", 15, 0);
             fighter.SetBlock(BodyPart.Head);
             bool eventRecieved = false;
-            fighter.Death += delegate (Fighter sender)
+            fighter.Death += delegate (object sender, EventArgs e)
             {
                 eventRecieved = true;
             };
-            
+
             fighter.GetHit(BodyPart.Body, 1000);
             Assert.AreEqual(eventRecieved, true);
         }
@@ -186,11 +186,11 @@ namespace FightClubLogic.Tests
             Fighter fighter = new Fighter("123", 15, 0);
             fighter.SetBlock(BodyPart.Head);
             bool eventRecieved = false;
-            fighter.Death += delegate (Fighter sender)
+            fighter.Death += delegate (object sender, EventArgs e)
             {
                 eventRecieved = true;
             };
-            
+
             fighter.GetHit(BodyPart.Body, 5);
             Assert.AreEqual(eventRecieved, false);
         }
