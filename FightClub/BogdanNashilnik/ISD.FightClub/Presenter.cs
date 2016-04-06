@@ -97,7 +97,6 @@ namespace ISD.FightClub
             FighterEventArgs eventArgs = (FighterEventArgs)e;
             this.Log.Add(eventArgs.Name + " заблокировал удар в " + eventArgs.Blocked + ".");
         }
-        
         public void Action(BodyPart bodyPart)
         {
             this.battle.Action(bodyPart);
