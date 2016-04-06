@@ -111,6 +111,5 @@ namespace ISD.FightClub
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
     }
 }
