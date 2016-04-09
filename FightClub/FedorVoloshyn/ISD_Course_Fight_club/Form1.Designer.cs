@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.buttonHead = new System.Windows.Forms.Button();
             this.buttonBody = new System.Windows.Forms.Button();
@@ -45,7 +46,9 @@
             this.loadGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actionLabel = new System.Windows.Forms.Label();
+            this.bindingSourceViewer = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceViewer)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonHead
@@ -211,6 +214,7 @@
             this.Text = "Fight Club";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceViewer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,6 +238,7 @@
         private System.Windows.Forms.Label actionLabel;
         private System.Windows.Forms.ToolStripMenuItem saveGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadGameToolStripMenuItem;
+        private System.Windows.Forms.BindingSource bindingSourceViewer;
     }
 }
 

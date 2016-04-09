@@ -20,23 +20,17 @@ namespace ISD_Course_Fight_club
         {
             InitializeComponent();
             gameProcess = new GameProcess();
-            UpdateForm();
+
+            bindingSourceViewer.DataSource = gameProcess;
+            bindingSourceViewer.CurrentItemChanged += UpdateLog;
+            progressBarCompPlayerHP.DataBindings.Add("Value", bindingSourceViewer, "ComputerHP");
+            progressBarPlayerHP.DataBindings.Add("Value", bindingSourceViewer, "UserHP");
+            actionLabel.DataBindings.Add("Text", bindingSourceViewer, "Status");
+
             gameProcess.FightOver += GameOver;
         }
 
-        private void UpdateForm()
-        {
-            if (gameProcess.Defender == "User")
-                actionLabel.Text = "Protect!";
-            else
-                actionLabel.Text = "Attack!";
-
-            progressBarCompPlayerHP.Value = gameProcess.ComputerHP;
-            progressBarPlayerHP.Value = gameProcess.UserHP;
-            UpdateLog();
-        }
-
-        private void UpdateLog()
+        private void UpdateLog(object sender, EventArgs e)
         {
             logShow.Clear();
             logShow.Lines = gameProcess.Log.ToArray();
@@ -84,49 +78,49 @@ namespace ISD_Course_Fight_club
         private void buttonHead_Click(object sender, EventArgs e)
         {
             gameProcess.Round(BodyPart.Head);
-            UpdateForm();
         }
 
         private void buttonBody_Click(object sender, EventArgs e)
         {
             gameProcess.Round(BodyPart.Body);
-            UpdateForm();
         }
 
         private void buttonLegs_Click(object sender, EventArgs e)
         {
             gameProcess.Round(BodyPart.Legs);
-            UpdateForm();
         }
 
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             gameProcess = new GameProcess();
+            bindingSourceViewer.DataSource = gameProcess;
             gameProcess.FightOver += GameOver;
             UnLockButtons();
-            UpdateForm();
         }
 
         private void saveGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Stream SaveFileStream = File.Create(SaveFileName);
-            BinaryFormatter serializer = new BinaryFormatter();
-            serializer.Serialize(SaveFileStream, gameProcess);
-            SaveFileStream.Close();
+            using (Stream SaveFileStream = File.Create(SaveFileName))
+            {
+                BinaryFormatter serializer = new BinaryFormatter();
+                serializer.Serialize(SaveFileStream, gameProcess);
+            }
         }
 
         private void loadGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (File.Exists(SaveFileName))
             {
-                Stream SaveFileStream = File.OpenRead(SaveFileName);
-                BinaryFormatter deserializer = new BinaryFormatter();
-                gameProcess = (GameProcess)deserializer.Deserialize(SaveFileStream);
+                using (Stream SaveFileStream = File.OpenRead(SaveFileName))
+                {
+                    BinaryFormatter deserializer = new BinaryFormatter();
+                    gameProcess = (GameProcess)deserializer.Deserialize(SaveFileStream);
+                    bindingSourceViewer.DataSource = gameProcess;
+                }
                 gameProcess.FightOver += GameOver;
-                SaveFileStream.Close();
                 UnLockButtons();
             }
-            UpdateForm();
+            
         }
     }
 }
