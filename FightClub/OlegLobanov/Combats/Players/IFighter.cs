@@ -11,7 +11,7 @@ namespace Combats
         Body = 2,
         Legs = 3
     }
-    public delegate void SomeHappened(Player sender, PlayerEventArgs result);
+    public delegate void SomeHappened(Player sender);
 
      interface IFighter
     {
@@ -19,10 +19,9 @@ namespace Combats
          event SomeHappened Wound;
          event SomeHappened Death;
 
-         int HP { get;  }
-         string Name { get;  }
-        BodyPart Blocked { get;  }
-        int Damage { get;  }
+        int HP { get; }
+        string Name { get; }
+        //Part BlockedPart { get; protected set; }
 
         void GetHit(BodyPart part,int damage);
         void SetBlock(BodyPart part);

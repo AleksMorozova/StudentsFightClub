@@ -28,40 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.statusLabel = new System.Windows.Forms.Label();
             this.HeadButton = new System.Windows.Forms.Button();
             this.BodyButton = new System.Windows.Forms.Button();
             this.LegsButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.firstPlayerLabel = new System.Windows.Forms.Label();
+            this.secondPlayerLabel = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.firstPlayerBar = new System.Windows.Forms.ProgressBar();
             this.secondPlayerBar = new System.Windows.Forms.ProgressBar();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.firstPlayerBar = new System.Windows.Forms.ProgressBar();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.logBox = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // statusLabel
             // 
-            this.label1.Location = new System.Drawing.Point(255, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 29);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.statusLabel.Location = new System.Drawing.Point(255, 21);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(117, 29);
+            this.statusLabel.TabIndex = 0;
+            this.statusLabel.Text = "label1";
+            this.statusLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // HeadButton
             // 
@@ -93,23 +93,23 @@
             this.LegsButton.UseVisualStyleBackColor = true;
             this.LegsButton.Click += new System.EventHandler(this.LegsButton_Click);
             // 
-            // label2
+            // firstPlayerLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "label2";
+            this.firstPlayerLabel.AutoSize = true;
+            this.firstPlayerLabel.Location = new System.Drawing.Point(14, 16);
+            this.firstPlayerLabel.Name = "firstPlayerLabel";
+            this.firstPlayerLabel.Size = new System.Drawing.Size(35, 13);
+            this.firstPlayerLabel.TabIndex = 4;
+            this.firstPlayerLabel.Text = "label2";
             // 
-            // label3
+            // secondPlayerLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(178, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "label3";
+            this.secondPlayerLabel.AutoSize = true;
+            this.secondPlayerLabel.Location = new System.Drawing.Point(178, 16);
+            this.secondPlayerLabel.Name = "secondPlayerLabel";
+            this.secondPlayerLabel.Size = new System.Drawing.Size(35, 13);
+            this.secondPlayerLabel.TabIndex = 5;
+            this.secondPlayerLabel.Text = "label3";
             // 
             // menuStrip1
             // 
@@ -140,49 +140,33 @@
             this.splitContainer1.Panel1.Controls.Add(this.panel2);
             this.splitContainer1.Panel1.Controls.Add(this.panel1);
             this.splitContainer1.Panel1.Controls.Add(this.HeadButton);
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
+            this.splitContainer1.Panel1.Controls.Add(this.statusLabel);
             this.splitContainer1.Panel1.Controls.Add(this.BodyButton);
             this.splitContainer1.Panel1.Controls.Add(this.LegsButton);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.listBox1);
+            this.splitContainer1.Panel2.Controls.Add(this.logBox);
             this.splitContainer1.Size = new System.Drawing.Size(626, 413);
             this.splitContainer1.SplitterDistance = 274;
             this.splitContainer1.TabIndex = 7;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.firstPlayerBar);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(12, 21);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(226, 234);
-            this.panel1.TabIndex = 6;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.secondPlayerBar);
             this.panel2.Controls.Add(this.pictureBox2);
-            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.secondPlayerLabel);
             this.panel2.Location = new System.Drawing.Point(388, 21);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(226, 234);
             this.panel2.TabIndex = 7;
             // 
-            // pictureBox1
+            // secondPlayerBar
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = global::Combats.Properties.Resources.player1;
-            this.pictureBox1.Location = new System.Drawing.Point(17, 55);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(190, 160);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.secondPlayerBar.Location = new System.Drawing.Point(23, 16);
+            this.secondPlayerBar.Name = "secondPlayerBar";
+            this.secondPlayerBar.Size = new System.Drawing.Size(142, 23);
+            this.secondPlayerBar.TabIndex = 5;
             // 
             // pictureBox2
             // 
@@ -197,6 +181,16 @@
             this.pictureBox2.TabIndex = 5;
             this.pictureBox2.TabStop = false;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.firstPlayerBar);
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.firstPlayerLabel);
+            this.panel1.Location = new System.Drawing.Point(12, 21);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(226, 234);
+            this.panel1.TabIndex = 6;
+            // 
             // firstPlayerBar
             // 
             this.firstPlayerBar.ForeColor = System.Drawing.Color.Maroon;
@@ -206,21 +200,27 @@
             this.firstPlayerBar.TabIndex = 0;
             this.firstPlayerBar.Value = 50;
             // 
-            // secondPlayerBar
+            // pictureBox1
             // 
-            this.secondPlayerBar.Location = new System.Drawing.Point(23, 16);
-            this.secondPlayerBar.Name = "secondPlayerBar";
-            this.secondPlayerBar.Size = new System.Drawing.Size(142, 23);
-            this.secondPlayerBar.TabIndex = 5;
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::Combats.Properties.Resources.player1;
+            this.pictureBox1.Location = new System.Drawing.Point(17, 55);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(190, 160);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
-            // listBox1
+            // logBox
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(0, 0);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(626, 135);
-            this.listBox1.TabIndex = 0;
+            this.logBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logBox.FormattingEnabled = true;
+            this.logBox.Location = new System.Drawing.Point(0, 0);
+            this.logBox.Name = "logBox";
+            this.logBox.Size = new System.Drawing.Size(626, 135);
+            this.logBox.TabIndex = 0;
             // 
             // Combats
             // 
@@ -241,12 +241,12 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -254,12 +254,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Button HeadButton;
         private System.Windows.Forms.Button BodyButton;
         private System.Windows.Forms.Button LegsButton;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label firstPlayerLabel;
+        private System.Windows.Forms.Label secondPlayerLabel;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem newGameToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer1;
@@ -269,7 +269,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ProgressBar secondPlayerBar;
         private System.Windows.Forms.ProgressBar firstPlayerBar;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox logBox;
     }
 }
 
