@@ -12,7 +12,7 @@ namespace CombatTests
         public void InitialisationTest()
         {
             Combats.Player first = new Combats.Player("f1", 100, 1000);
-            Combats.CompPlayer second = new Combats.CompPlayer("f2", 100, 1000);
+            Combats.Player second = new Combats.Player("f2", 100, 1000);
 
             Controller contr = new Controller(first, second);
 
@@ -26,7 +26,7 @@ namespace CombatTests
         public void TickTest()
         {
             Combats.Player first = new Combats.Player("f1", 100, 1000);
-            Combats.CompPlayer second = new Combats.CompPlayer("f2", 100, 1000);
+            Combats.Player second = new Combats.Player("f2", 100, 1000);
 
             Controller contr = new Controller(first, second);
 
@@ -44,7 +44,7 @@ namespace CombatTests
         public void DMGTest()
         {
             Combats.Player first = new Combats.Player("f1", 100, 1000);
-            Combats.CompPlayer second = new Combats.CompPlayer("f2", 100, 1000);
+            Combats.Player second = new Combats.Player("f2", 100, 1000);
 
             Controller contr = new Controller(first, second);
 
@@ -52,9 +52,9 @@ namespace CombatTests
             Assert.AreEqual(contr.human.HP, 100);
 
             contr.human.GetHit(BodyPart.Head, 50);
-            Assert.AreEqual(contr.human.HP, 50);
+            Assert.AreEqual(contr.human.HP, 100);
 
-            contr.human.GetHit(BodyPart.Head, 100);
+            contr.human.GetHit(BodyPart.Body, 100);
             Assert.AreEqual(contr.human.HP, 0);
         }
 
@@ -75,7 +75,7 @@ namespace CombatTests
         [TestMethod()]
         public void HitTest()
         {
-            Player first = new Player("f1", 150, 16);
+            Player first = new Player("f1", 15, 16);
             first.SetBlock(BodyPart.Head);
 
             first.GetHit(BodyPart.Head, 10);
